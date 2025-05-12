@@ -1,0 +1,156 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Pendaftaran API",
+      "description": "API untuk mengelola data pendaftaran mahasiswa",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8000"
+      }
+    ],
+    "paths": {
+      "/api/pendaftaran": {
+        "get": {
+          "summary": "Ambil semua data pendaftaran",
+          "description": "Mengambil seluruh data pendaftaran",
+          "responses": {
+            "200": {
+              "description": "Daftar pendaftaran berhasil diambil"
+            }
+          }
+        },
+        "post": {
+          "summary": "Tambah data pendaftaran",
+          "description": "Membuat data pendaftaran baru",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nama_lengkap": { "type": "string" },
+                    "nim": { "type": "string" },
+                    "email": { "type": "string", "format": "email" },
+                    "no_hp": { "type": "string" },
+                    "alamat": { "type": "string" },
+                    "tanggal_lahir": { "type": "string", "format": "date" },
+                    "jenis_kelamin": { "type": "string", "enum": ["L", "P"] },
+                    "tanggal_daftar": { "type": "string", "format": "date" },
+                    "image": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  },
+                  "required": [
+                    "nama_lengkap", "nim", "email", "no_hp",
+                    "alamat", "tanggal_lahir", "jenis_kelamin"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Data pendaftaran berhasil ditambahkan"
+            },
+            "400": {
+              "description": "Input tidak valid"
+            }
+          }
+        }
+      },
+      "/api/pendaftaran/{id}": {
+        "get": {
+          "summary": "Ambil data pendaftaran berdasarkan ID",
+          "description": "Mengambil satu data pendaftaran berdasarkan ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "integer" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Data pendaftaran ditemukan"
+            },
+            "404": {
+              "description": "Data tidak ditemukan"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update data pendaftaran",
+          "description": "Melakukan pembaruan data pendaftaran berdasarkan ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "integer" }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nama_lengkap": { "type": "string" },
+                    "nim": { "type": "string" },
+                    "email": { "type": "string", "format": "email" },
+                    "no_hp": { "type": "string" },
+                    "alamat": { "type": "string" },
+                    "tanggal_lahir": { "type": "string", "format": "date" },
+                    "jenis_kelamin": { "type": "string", "enum": ["L", "P"] },
+                    "tanggal_daftar": { "type": "string", "format": "date" },
+                    "image": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Data pendaftaran berhasil diperbarui"
+            },
+            "400": {
+              "description": "Data tidak valid"
+            },
+            "404": {
+              "description": "Data tidak ditemukan"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Hapus data pendaftaran",
+          "description": "Menghapus data pendaftaran berdasarkan ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "integer" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Data pendaftaran berhasil dihapus"
+            },
+            "404": {
+              "description": "Data tidak ditemukan"
+            }
+          }
+        }
+      }
+    }
+  }
+  

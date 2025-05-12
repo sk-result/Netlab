@@ -1,0 +1,138 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Materi Matkul API",
+      "version": "1.0.0",
+      "description": "API CRUD untuk entitas Materi Matkul yang berelasi dengan Category Matkul"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8000"
+      }
+    ],
+    "paths": {
+      "/api/materi-matkul": {
+        "get": {
+          "summary": "Ambil semua materi matkul",
+          "responses": {
+            "200": {
+              "description": "Berhasil mengambil daftar materi"
+            }
+          }
+        },
+        "post": {
+          "summary": "Buat materi matkul baru",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "bab": { "type": "string" },
+                    "description": { "type": "string" },
+                    "category_id": { "type": "integer" },
+                    "file_pdf": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  },
+                  "required": ["name", "bab", "description", "category_id", "file_pdf"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Materi berhasil dibuat"
+            },
+            "400": {
+              "description": "Validasi gagal"
+            }
+          }
+        }
+      },
+      "/api/materi-matkul/{id}": {
+        "get": {
+          "summary": "Ambil detail materi matkul berdasarkan ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "integer" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Detail materi ditemukan"
+            },
+            "404": {
+              "description": "Materi tidak ditemukan"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update materi matkul berdasarkan ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "integer" }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "bab": { "type": "string" },
+                    "description": { "type": "string" },
+                    "category_id": { "type": "integer" },
+                    "file_pdf": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  },
+                  "required": ["name", "bab", "description", "category_id"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Materi berhasil diperbarui"
+            },
+            "404": {
+              "description": "Materi tidak ditemukan"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Hapus materi matkul berdasarkan ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "integer" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Materi berhasil dihapus"
+            },
+            "404": {
+              "description": "Materi tidak ditemukan"
+            }
+          }
+        }
+      }
+    }
+  }
+      

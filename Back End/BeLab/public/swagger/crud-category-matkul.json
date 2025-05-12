@@ -1,0 +1,130 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Matkul Category API",
+      "description": "API CRUD untuk kategori matkul",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8000/api"
+      }
+    ],
+    "paths": {
+      "/matkul-categories": {
+        "get": {
+          "summary": "List semua kategori matkul",
+          "responses": {
+            "200": {
+              "description": "Berhasil mengambil data kategori matkul"
+            }
+          }
+        },
+        "post": {
+          "summary": "Tambah kategori matkul",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" }
+                  },
+                  "required": ["name"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Kategori berhasil ditambahkan"
+            },
+            "400": {
+              "description": "Validasi gagal"
+            }
+          }
+        }
+      },
+      "/matkul-categories/{id}": {
+        "get": {
+          "summary": "Ambil detail kategori matkul berdasarkan ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Detail kategori ditemukan"
+            },
+            "404": {
+              "description": "Kategori tidak ditemukan"
+            }
+          }
+        },
+        "put": {
+          "summary": "Perbarui kategori matkul",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" }
+                  },
+                  "required": ["name"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Kategori berhasil diperbarui"
+            },
+            "404": {
+              "description": "Kategori tidak ditemukan"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Hapus kategori matkul",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Kategori berhasil dihapus"
+            },
+            "404": {
+              "description": "Kategori tidak ditemukan"
+            }
+          }
+        }
+      }
+    }
+  }
+  

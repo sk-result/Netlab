@@ -1,0 +1,114 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Equipment API",
+      "version": "1.0.0",
+      "description": "CRUD API untuk peralatan yang berelasi dengan kategori"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8000"
+      }
+    ],
+    "paths": {
+      "/api/equipment": {
+        "get": {
+          "summary": "Ambil semua peralatan",
+          "responses": {
+            "200": {
+              "description": "Data peralatan ditemukan"
+            }
+          }
+        },
+        "post": {
+          "summary": "Tambah peralatan",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "category_id": { "type": "integer" },
+                    "image": { "type": "string", "format": "binary" },
+                    "description": { "type": "string" }
+                  },
+                  "required": ["name", "category_id"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": { "description": "Peralatan berhasil ditambahkan" },
+            "400": { "description": "Input tidak valid" }
+          }
+        }
+      },
+      "/api/equipment/{id}": {
+        "get": {
+          "summary": "Ambil peralatan berdasarkan ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "integer" }
+            }
+          ],
+          "responses": {
+            "200": { "description": "Peralatan ditemukan" },
+            "404": { "description": "Peralatan tidak ditemukan" }
+          }
+        },
+        "put": {
+          "summary": "Update data peralatan",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "integer" }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "category_id": { "type": "integer" },
+                    "image": { "type": "string", "format": "binary" },
+                    "description": { "type": "string" }
+                  },
+                  "required": ["name", "category_id"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": { "description": "Data berhasil diupdate" },
+            "404": { "description": "Peralatan tidak ditemukan" }
+          }
+        },
+        "delete": {
+          "summary": "Hapus peralatan berdasarkan ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "integer" }
+            }
+          ],
+          "responses": {
+            "200": { "description": "Peralatan berhasil dihapus" },
+            "404": { "description": "Peralatan tidak ditemukan" }
+          }
+        }
+      }
+    }
+  }
+  

@@ -1,0 +1,289 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Category API",
+        "version": "1.0.0",
+        "description": "RESTful API untuk manajemen kategori (CRUD)."
+    },
+    "paths": {
+        "/api/category": {
+            "get": {
+                "summary": "Ambil semua kategori",
+                "tags": ["Category"],
+                "responses": {
+                    "200": {
+                        "description": "Daftar kategori berhasil diambil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Elektronik"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2025-05-03T09:00:00Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2025-05-03T09:00:00Z"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Terjadi kesalahan pada server"
+                    }
+                }
+            }
+        },
+        "/api/category/create": {
+            "post": {
+                "summary": "Buat kategori baru",
+                "tags": ["Category"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["name"],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Elektronik"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Kategori berhasil dibuat",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Kategori berhasil dibuat"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Elektronik"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-05-03T09:30:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-05-03T09:30:00Z"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Input tidak valid"
+                    }
+                }
+            }
+        },
+        "/api/category/update/{id}": {
+            "patch": {
+                "summary": "Perbarui data kategori",
+                "tags": ["Category"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["name"],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Elektronik"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Kategori berhasil diperbarui",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Kategori berhasil diperbarui"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Elektronik"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-05-03T09:30:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-05-03T10:00:00Z"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Input tidak valid"
+                    },
+                    "404": {
+                        "description": "Kategori tidak ditemukan"
+                    }
+                }
+            }
+        },
+        "/api/category/delete/{id}": {
+            "delete": {
+                "summary": "Hapus kategori",
+                "tags": ["Category"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Kategori berhasil dihapus",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Kategori berhasil dihapus"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Kategori tidak ditemukan"
+                    }
+                }
+            }
+        },
+        "/api/category/show/{id}": {
+            "get": {
+                "summary": "Tampilkan detail kategori berdasarkan ID",
+                "tags": ["Category"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Kategori ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Elektronik"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-05-03T09:00:00Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-05-03T09:00:00Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Kategori tidak ditemukan"
+                    }
+                }
+            }
+        }
+    }
+}
