@@ -12,7 +12,7 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <h4 class="card-title">Add Row</h4>
-                            <a href="" class="btn btn-primary btn-round ms-auto" >
+                            <a href="{{route('admin.categoryMatkul-create')}}" class="btn btn-primary btn-round ms-auto" >
                                 <i class="fa fa-plus"></i>
                                 Add Row
                             </a>

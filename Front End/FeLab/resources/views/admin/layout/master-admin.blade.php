@@ -2,10 +2,10 @@
 <html lang="en">
 
 @include('admin.layout.head')
-
 <style>
-    [data-notify="container"] {
-        display: none !important;
+    .btn-toggle {
+        padding: 10px 10px;
+        min-height: 40px;
     }
 </style>
 
@@ -33,6 +33,7 @@
                         <i class="gg-more-vertical-alt"></i>
                     </button>
                 </div>
+
                 <!-- End Logo Header -->
             </div>
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
@@ -51,20 +52,20 @@
                             </span>
                             <h4 class="text-section">Form Data</h4>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" {{ request()->routeIs('admin.category') || request()->routeIs('admin.categoryMatkul') ? 'active' : '' }}>
                             <a data-bs-toggle="collapse" href="#Category">
                                 <i class="fas fa-layer-group"></i>
                                 <p>Category</p>
                                 <span class="caret"></span>
                             </a>
-                            <div class="collapse" id="Category">
+                            <div class="collapse" {{ request()->routeIs('admin.category') || request()->routeIs('admin.categoryMatkul') ? 'show' : '' }}" id="Category">
                                 <ul class="nav nav-collapse">
-                                    <li>
+                                    <li class="{{ request()->routeIs('admin.category') ? 'active' : '' }}">
                                         <a href="{{ route('admin.category') }}">
                                             <span class="sub-item">Category Tool</span>
                                         </a>
                                     </li>
-                                    <li>
+                                    <li class="{{ request()->routeIs('admin.categoryMatkul') ? 'active' : '' }}">
                                         <a href="{{ route('admin.categoryMatkul') }}">
                                             <span class="sub-item">Category Mata Kuliah</span>
                                         </a>
@@ -375,7 +376,7 @@
                 <!-- End Navbar -->
             </div>
 
-            
+
             @yield('content')
 
 
