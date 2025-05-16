@@ -39,26 +39,30 @@
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
-                        <li class="nav-item active">
-                            <a href="{{ route('admin.dashboard') }}" data-bs-toggle="collapse" href="#dashboard"
-                                class="collapsed" aria-expanded="false">
+                        <li class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                            <a href="{{ route('admin.dashboard') }}">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
+
                         <li class="nav-section">
                             <span class="sidebar-mini-icon">
                                 <i class="fa fa-ellipsis-h"></i>
                             </span>
                             <h4 class="text-section">Form Data</h4>
                         </li>
-                        <li class="nav-item" {{ request()->routeIs('admin.category') || request()->routeIs('admin.categoryMatkul') ? 'active' : '' }}>
-                            <a data-bs-toggle="collapse" href="#Category">
+
+                        <li
+                            class="nav-item {{ request()->routeIs('admin.category', 'admin.categoryMatkul') ? 'active' : '' }}">
+                            <a data-bs-toggle="collapse" href="#Category"
+                                aria-expanded="{{ request()->routeIs('admin.category', 'admin.categoryMatkul') ? 'true' : 'false' }}">
                                 <i class="fas fa-layer-group"></i>
                                 <p>Category</p>
                                 <span class="caret"></span>
                             </a>
-                            <div class="collapse" {{ request()->routeIs('admin.category') || request()->routeIs('admin.categoryMatkul') ? 'show' : '' }}" id="Category">
+                            <div class="collapse {{ request()->routeIs('admin.category', 'admin.categoryMatkul') ? 'show' : '' }}"
+                                id="Category">
                                 <ul class="nav nav-collapse">
                                     <li class="{{ request()->routeIs('admin.category') ? 'active' : '' }}">
                                         <a href="{{ route('admin.category') }}">
@@ -69,6 +73,32 @@
                                         <a href="{{ route('admin.categoryMatkul') }}">
                                             <span class="sub-item">Category Mata Kuliah</span>
                                         </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li
+                            class="nav-item {{ request()->routeIs('admin.equipment', 'admin.MateriMatkul') ? 'active' : '' }}">
+                            <a data-bs-toggle="collapse" href="#equipment"
+                                aria-expanded="{{ request()->routeIs('admin.equipment', 'admin.MateriMatkul') ? 'true' : 'false' }}">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Data</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse {{ request()->routeIs('admin.equipment', 'admin.MateriMatkul') ? 'show' : '' }}"
+                                id="equipment">
+                                <ul class="nav nav-collapse">
+                                    <li class="{{ request()->routeIs('admin.equipment') ? 'active' : '' }}">
+                                        <a href="{{ route('admin.equipment') }}">
+                                            <span class="sub-item">Equipment Tool</span>
+                                        </a>
+                                    </li>
+                                    <li class="{{ request()->routeIs('admin.MateriMatkul') ? 'active' : '' }}">
+                                        <a href="{{ route('admin.MateriMatkul') }}">
+                                            <span class="sub-item">Materi Matkul</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -131,8 +161,9 @@
                                 </ul>
                             </li>
                             <li class="nav-item topbar-icon dropdown hidden-caret">
-                                <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="messageDropdown"
+                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
                                     <i class="fa fa-envelope"></i>
                                 </a>
                                 <ul class="dropdown-menu messages-notif-box animated fadeIn"

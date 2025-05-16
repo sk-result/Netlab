@@ -23,12 +23,16 @@
             name: "Category API"
           },
           {
+            url: "swagger/crud-category-matkul.json",
+            name: "Matkul Category API"
+          },
+          {
             url: "swagger/crud-equipment.json",
             name: "Equipment API"
           },
           {
-            url: "swagger/crud-category-matkul.json",
-            name: "Matkul Category API"
+            url: "swagger/crud-materi-matkul.json",
+            name: "Materi Matkul API"
           },
           {
             url: "swagger/crud-pendaftaran.json",
