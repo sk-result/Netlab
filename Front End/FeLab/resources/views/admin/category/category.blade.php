@@ -5,14 +5,14 @@
         <div class="page-inner">
             <div class="page-header">
                 <h3 class="fw-bold mb-3">DataTables.Net</h3>
-               
+
             </div>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <h4 class="card-title">Add Row</h4>
-                            <a href="{{route('admin.category-create')}}" class="btn btn-primary btn-round ms-auto" >
+                            <a href="{{ route('admin.category-create') }}" class="btn btn-primary btn-round ms-auto">
                                 <i class="fa fa-plus"></i>
                                 Add Row
                             </a>
@@ -84,21 +84,33 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>
-                                            <div class="form-button-action">
-                                                <button type="button" data-bs-toggle="tooltip" title=""
-                                                    class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" data-bs-toggle="tooltip" title=""
-                                                    class="btn btn-link btn-danger" data-original-title="Remove">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    @foreach ($categories as $cat)
+                                        <tr>
+                                            <td>{{ $cat['name'] }}</td>
+                                            <td>
+                                                <div class="form-button-action">
+                                                    <form action="{{ route('admin.category-update', $cat['id']) }}">
+                                                        <button type="submit" data-bs-toggle="tooltip" title=""
+                                                            class="btn btn-link btn-primary btn-lg"
+                                                            data-original-title="Edit Task">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                    </form>
+                                                    <form action="{{ route('admin.category-destroy', $cat['id']) }}"
+                                                        method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-link btn-danger"
+                                                            onclick="return confirm('Yakin ingin menghapus kategori ini?')">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </form>
+
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -107,4 +119,5 @@
             </div>
         </div>
     </div>
+    @include('admin.category.script')
 @endsection

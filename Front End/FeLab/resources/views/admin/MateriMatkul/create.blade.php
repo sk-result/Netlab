@@ -46,8 +46,6 @@
                     <input class="form-control" type="file" id="file" name="image" accept="image/*">
                 </div>
 
-                
-
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <a href="" class="btn btn-secondary">Kembali</a>
             </form>

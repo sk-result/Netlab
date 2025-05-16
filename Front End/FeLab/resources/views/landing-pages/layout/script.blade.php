@@ -17,4 +17,6 @@
   <!-- Main JS File -->
   <script src="assets-landing/js/main.js"></script>
 
+  
+
   @yield('script')

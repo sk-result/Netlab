@@ -13,7 +13,7 @@ class CategoryController extends Controller
         $categories = Category::all();
 
         if ($categories->isEmpty()) {
-            return response()->json([
+            return response()->json([           
                 'status' => 404,
                 'message' => 'Tidak ada kategori ditemukan',
                 'data' => []

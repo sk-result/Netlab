@@ -19,6 +19,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.das
 // CATEGORY ROUTE
 Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
 Route::get('/category/create', [CategoryController::class, 'create'])->name('admin.category-create');
+Route::post('/category/store', [CategoryController::class, 'store'])->name('admin.category-store');
+Route::get('/category/update/{id}', [CategoryController::class, 'update'])->name('admin.category-update');
+Route::post('/category/procesUpdate/{id}', [CategoryController::class, 'procesUpdate'])->name('admin.category-procesUpdate');
+Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category-destroy');
+
 
 // CATEGORY MATKUL ROUTE
 Route::get('/categoryMatkul', [CategoryMatkulController::class, 'index'])->name('admin.categoryMatkul');
