@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "About API",
-    "description": "API CRUD untuk informasi halaman About",
+    "description": "API CRUD untuk data About",
     "version": "1.0.0"
   },
   "servers": [
@@ -11,47 +11,69 @@
     }
   ],
   "paths": {
-    "/abouts": {
+    "/api/abouts": {
       "get": {
-        "summary": "List semua data about",
-        "operationId": "getAbouts",
+        "summary": "List semua abouts",
+        "operationId": "getAllAbouts",
         "responses": {
           "200": {
-            "description": "Berhasil mengambil data about"
+            "description": "Berhasil mengambil data abouts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/About" }
+                }
+              }
+            }
           }
         }
       }
     },
-    "/abouts/create": {
+    "/api/abouts/create": {
       "post": {
-        "summary": "Tambah data about",
+        "summary": "Tambah data about baru",
         "operationId": "createAbout",
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "title": { "type": "string" },
-                  "description": { "type": "string" }
+                  "description_1": { "type": "string" },
+                  "description_2": { "type": "string" },
+                  "image_1": { "type": "string", "format": "binary", "nullable": true },
+                  "image_2": { "type": "string", "format": "binary", "nullable": true }
                 },
-                "required": ["title", "description"]
+                "required": ["title", "description_1", "description_2"]
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Data about berhasil ditambahkan"
+            "description": "About berhasil dibuat",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "About berhasil dibuat" },
+                    "data": { "$ref": "#/components/schemas/About" }
+                  }
+                }
+              }
+            }
           },
-          "400": {
+          "422": {
             "description": "Validasi gagal"
           }
         }
       }
     },
-    "/abouts/show/{id}": {
+    "/api/abouts/show/{id}": {
       "get": {
         "summary": "Ambil detail about berdasarkan ID",
         "operationId": "getAboutById",
@@ -65,15 +87,30 @@
         ],
         "responses": {
           "200": {
-            "description": "Data about ditemukan"
+            "description": "Data about ditemukan",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/About" }
+              }
+            }
           },
           "404": {
-            "description": "Data about tidak ditemukan"
+            "description": "Data tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Data tidak ditemukan" }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
-    "/abouts/update/{id}": {
+    "/api/abouts/update/{id}": {
       "put": {
         "summary": "Perbarui data about",
         "operationId": "updateAbout",
@@ -88,29 +125,56 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "title": { "type": "string" },
-                  "description": { "type": "string" }
+                  "description_1": { "type": "string" },
+                  "description_2": { "type": "string" },
+                  "image_1": { "type": "string", "format": "binary", "nullable": true },
+                  "image_2": { "type": "string", "format": "binary", "nullable": true }
                 },
-                "required": ["title", "description"]
+                "required": ["title", "description_1", "description_2"]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Data about berhasil diperbarui"
+            "description": "About berhasil diperbarui",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "About berhasil diperbarui" },
+                    "data": { "$ref": "#/components/schemas/About" }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Data about tidak ditemukan"
+            "description": "Data tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Data tidak ditemukan" }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validasi gagal"
           }
         }
       }
     },
-    "/abouts/destroy/{id}": {
+    "/api/abouts/destroy/{id}": {
       "delete": {
         "summary": "Hapus data about",
         "operationId": "deleteAbout",
@@ -124,11 +188,48 @@
         ],
         "responses": {
           "200": {
-            "description": "Data about berhasil dihapus"
+            "description": "About berhasil dihapus",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "About berhasil dihapus" }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Data about tidak ditemukan"
+            "description": "Data tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Data tidak ditemukan" }
+                  }
+                }
+              }
+            }
           }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "About": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "title": { "type": "string", "example": "Tentang Kami" },
+          "description_1": { "type": "string", "example": "Ini adalah deskripsi pertama." },
+          "description_2": { "type": "string", "example": "Ini adalah deskripsi kedua." },
+          "image_1": { "type": "string", "nullable": true, "example": "about/image1.jpg" },
+          "image_2": { "type": "string", "nullable": true, "example": "about/image2.jpg" },
+          "created_at": { "type": "string", "format": "date-time", "example": "2025-05-18T10:00:00Z" },
+          "updated_at": { "type": "string", "format": "date-time", "example": "2025-05-18T10:00:00Z" }
         }
       }
     }

@@ -2,29 +2,43 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Equipment API",
-    "version": "1.0.0",
-    "description": "CRUD API untuk peralatan yang berelasi dengan kategori"
+    "description": "API CRUD untuk data Equipment dengan relasi Category",
+    "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://localhost:8001"
+      "url": "http://localhost:8001/api"
     }
   ],
   "paths": {
     "/api/equipment": {
       "get": {
-        "summary": "Ambil semua peralatan",
-        "operationId": "getEquipments",
+        "summary": "List semua equipment beserta kategori",
+        "operationId": "getAllEquipment",
         "responses": {
           "200": {
-            "description": "Data peralatan ditemukan"
+            "description": "Berhasil mengambil data equipment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "integer", "example": 200 },
+                    "data": {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/EquipmentWithCategory" }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/api/equipment/create": {
       "post": {
-        "summary": "Tambah peralatan",
+        "summary": "Tambah data equipment baru",
         "operationId": "createEquipment",
         "requestBody": {
           "required": true,
@@ -35,11 +49,8 @@
                 "properties": {
                   "name": { "type": "string" },
                   "category_id": { "type": "integer" },
-                  "image": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "description": { "type": "string" }
+                  "image": { "type": "string", "format": "binary", "nullable": true },
+                  "description": { "type": "string", "nullable": true }
                 },
                 "required": ["name", "category_id"]
               }
@@ -47,14 +58,30 @@
           }
         },
         "responses": {
-          "201": { "description": "Peralatan berhasil ditambahkan" },
-          "400": { "description": "Input tidak valid" }
+          "201": {
+            "description": "Equipment berhasil ditambahkan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "integer", "example": 201 },
+                    "message": { "type": "string", "example": "Peralatan berhasil ditambahkan" },
+                    "data": { "$ref": "#/components/schemas/Equipment" }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validasi gagal"
+          }
         }
       }
     },
     "/api/equipment/show/{id}": {
       "get": {
-        "summary": "Ambil peralatan berdasarkan ID",
+        "summary": "Ambil detail equipment berdasarkan ID dengan kategori",
         "operationId": "getEquipmentById",
         "parameters": [
           {
@@ -65,14 +92,39 @@
           }
         ],
         "responses": {
-          "200": { "description": "Peralatan ditemukan" },
-          "404": { "description": "Peralatan tidak ditemukan" }
+          "200": {
+            "description": "Data equipment ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "integer", "example": 200 },
+                    "data": { "$ref": "#/components/schemas/EquipmentWithCategory" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Peralatan tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Peralatan tidak ditemukan" }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
     "/api/equipment/update/{id}": {
       "put": {
-        "summary": "Update data peralatan",
+        "summary": "Perbarui data equipment",
         "operationId": "updateEquipment",
         "parameters": [
           {
@@ -91,26 +143,52 @@
                 "properties": {
                   "name": { "type": "string" },
                   "category_id": { "type": "integer" },
-                  "image": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "description": { "type": "string" }
+                  "description": { "type": "string" },
+                  "image": { "type": "string", "format": "binary", "nullable": true }
                 },
-                "required": ["name", "category_id"]
+                "required": ["name", "category_id", "description"]
               }
             }
           }
         },
         "responses": {
-          "200": { "description": "Data berhasil diupdate" },
-          "404": { "description": "Peralatan tidak ditemukan" }
+          "200": {
+            "description": "Data equipment berhasil diperbarui",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "integer", "example": 200 },
+                    "message": { "type": "string", "example": "Data peralatan berhasil diperbarui" },
+                    "data": { "$ref": "#/components/schemas/Equipment" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Peralatan tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Peralatan tidak ditemukan" }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validasi gagal"
+          }
         }
       }
     },
     "/api/equipment/destroy/{id}": {
       "delete": {
-        "summary": "Hapus peralatan berdasarkan ID",
+        "summary": "Hapus data equipment",
         "operationId": "deleteEquipment",
         "parameters": [
           {
@@ -121,9 +199,69 @@
           }
         ],
         "responses": {
-          "200": { "description": "Peralatan berhasil dihapus" },
-          "404": { "description": "Peralatan tidak ditemukan" }
+          "200": {
+            "description": "Peralatan berhasil dihapus",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Peralatan berhasil dihapus" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Peralatan tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Peralatan tidak ditemukan" }
+                  }
+                }
+              }
+            }
+          }
         }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "name": { "type": "string", "example": "Elektronik" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "Equipment": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "name": { "type": "string", "example": "Laptop" },
+          "category_id": { "type": "integer", "example": 1 },
+          "image": { "type": "string", "nullable": true, "example": "images/equipment/laptop.jpg" },
+          "description": { "type": "string", "nullable": true, "example": "Laptop gaming high-end" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "EquipmentWithCategory": {
+        "type": "object",
+        "allOf": [
+          { "$ref": "#/components/schemas/Equipment" },
+          {
+            "properties": {
+              "category": { "$ref": "#/components/schemas/Category" }
+            }
+          }
+        ]
       }
     }
   }

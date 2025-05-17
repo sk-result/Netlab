@@ -58,6 +58,12 @@ Route::get('materi-matkul/show/{id}', [MateriMatkulController::class, 'show']);
 Route::put('materi-matkul/update/{id}', [MateriMatkulController::class, 'update']);
 Route::delete('materi-matkul/destroy/{id}', [MateriMatkulController::class, 'destroy']);
 
+use App\Http\Controllers\PendaftaranController;
+Route::get('pendaftaran', [PendaftaranController::class, 'index']);
+Route::post('pendaftaran/create', [PendaftaranController::class, 'store']);
+Route::get('pendaftaran/show/{id}', [PendaftaranController::class, 'show']);
+Route::put('pendaftaran/update/{id}', [PendaftaranController::class, 'update']);
+Route::delete('pendaftaran/destroy/{id}', [PendaftaranController::class, 'destroy']);
 
 use App\Http\Controllers\AboutController;
 Route::get('abouts', [AboutController::class, 'index']);
@@ -67,9 +73,3 @@ Route::put('abouts/update/{id}', [AboutController::class, 'update']);
 Route::delete('abouts/destroy/{id}', [AboutController::class, 'destroy']);
 
 
-use App\Http\Controllers\PendaftaranController;
-Route::get('pendaftaran', [PendaftaranController::class, 'index']);
-Route::post('pendaftaran/create', [PendaftaranController::class, 'store']);
-Route::get('pendaftaran/show/{id}', [PendaftaranController::class, 'show']);
-Route::put('pendaftaran/update/{id}', [PendaftaranController::class, 'update']);
-Route::delete('pendaftaran/destroy/{id}', [PendaftaranController::class, 'destroy']);

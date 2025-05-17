@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Pendaftaran API",
-    "description": "API CRUD untuk data pendaftaran",
+    "description": "API CRUD untuk pendaftaran mahasiswa",
     "version": "1.0.0"
   },
   "servers": [
@@ -11,49 +11,72 @@
     }
   ],
   "paths": {
-    "/pendaftaran": {
+    "/api/pendaftaran": {
       "get": {
-        "summary": "List semua data pendaftaran",
-        "operationId": "getPendaftaran",
+        "summary": "List semua pendaftaran",
+        "operationId": "getAllPendaftaran",
         "responses": {
           "200": {
-            "description": "Berhasil mengambil data pendaftaran"
+            "description": "Berhasil mengambil data pendaftaran",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Pendaftaran" }
+                }
+              }
+            }
           }
         }
       }
     },
-    "/pendaftaran/create": {
+    "/api/pendaftaran/create": {
       "post": {
-        "summary": "Tambah data pendaftaran",
+        "summary": "Tambah pendaftaran baru",
         "operationId": "createPendaftaran",
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nama": { "type": "string" },
+                  "nama_lengkap": { "type": "string" },
+                  "nim": { "type": "string" },
                   "email": { "type": "string", "format": "email" },
-                  "telepon": { "type": "string" },
-                  "alamat": { "type": "string" }
+                  "no_hp": { "type": "string" },
+                  "alamat": { "type": "string" },
+                  "tanggal_lahir": { "type": "string", "format": "date" },
+                  "jenis_kelamin": { "type": "string", "enum": ["L", "P"] },
+                  "image": { "type": "string", "format": "binary", "nullable": true }
                 },
-                "required": ["nama", "email", "telepon", "alamat"]
+                "required": ["nama_lengkap", "nim", "email", "no_hp", "alamat", "tanggal_lahir", "jenis_kelamin"]
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Data pendaftaran berhasil ditambahkan"
+            "description": "Pendaftaran berhasil dibuat",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Pendaftaran berhasil dibuat" },
+                    "data": { "$ref": "#/components/schemas/Pendaftaran" }
+                  }
+                }
+              }
+            }
           },
-          "400": {
+          "422": {
             "description": "Validasi gagal"
           }
         }
       }
     },
-    "/pendaftaran/show/{id}": {
+    "/api/pendaftaran/show/{id}": {
       "get": {
         "summary": "Ambil detail pendaftaran berdasarkan ID",
         "operationId": "getPendaftaranById",
@@ -67,15 +90,30 @@
         ],
         "responses": {
           "200": {
-            "description": "Data pendaftaran ditemukan"
+            "description": "Data pendaftaran ditemukan",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Pendaftaran" }
+              }
+            }
           },
           "404": {
-            "description": "Data pendaftaran tidak ditemukan"
+            "description": "Data pendaftaran tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Data pendaftaran tidak ditemukan" }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
-    "/pendaftaran/update/{id}": {
+    "/api/pendaftaran/update/{id}": {
       "put": {
         "summary": "Perbarui data pendaftaran",
         "operationId": "updatePendaftaran",
@@ -90,31 +128,59 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nama": { "type": "string" },
+                  "nama_lengkap": { "type": "string" },
+                  "nim": { "type": "string" },
                   "email": { "type": "string", "format": "email" },
-                  "telepon": { "type": "string" },
-                  "alamat": { "type": "string" }
+                  "no_hp": { "type": "string" },
+                  "alamat": { "type": "string" },
+                  "tanggal_lahir": { "type": "string", "format": "date" },
+                  "jenis_kelamin": { "type": "string", "enum": ["L", "P"] },
+                  "image": { "type": "string", "format": "binary", "nullable": true }
                 },
-                "required": ["nama", "email", "telepon", "alamat"]
+                "required": ["nama_lengkap", "nim", "email", "no_hp", "alamat", "tanggal_lahir", "jenis_kelamin"]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Data pendaftaran berhasil diperbarui"
+            "description": "Pendaftaran berhasil diperbarui",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Pendaftaran berhasil diperbarui" },
+                    "data": { "$ref": "#/components/schemas/Pendaftaran" }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Data pendaftaran tidak ditemukan"
+            "description": "Data pendaftaran tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Data pendaftaran tidak ditemukan" }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validasi gagal"
           }
         }
       }
     },
-    "/pendaftaran/destroy/{id}": {
+    "/api/pendaftaran/destroy/{id}": {
       "delete": {
         "summary": "Hapus data pendaftaran",
         "operationId": "deletePendaftaran",
@@ -128,11 +194,52 @@
         ],
         "responses": {
           "200": {
-            "description": "Data pendaftaran berhasil dihapus"
+            "description": "Pendaftaran berhasil dihapus",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Pendaftaran berhasil dihapus" }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Data pendaftaran tidak ditemukan"
+            "description": "Data pendaftaran tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Data pendaftaran tidak ditemukan" }
+                  }
+                }
+              }
+            }
           }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pendaftaran": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "nama_lengkap": { "type": "string", "example": "Budi Santoso" },
+          "nim": { "type": "string", "example": "1234567890" },
+          "email": { "type": "string", "format": "email", "example": "budi@example.com" },
+          "no_hp": { "type": "string", "example": "08123456789" },
+          "alamat": { "type": "string", "example": "Jl. Merdeka No.10" },
+          "tanggal_lahir": { "type": "string", "format": "date", "example": "2000-01-01" },
+          "jenis_kelamin": { "type": "string", "example": "L" },
+          "image": { "type": "string", "nullable": true, "example": "pendaftaran/abc123.jpg" },
+          "tanggal_daftar": { "type": "string", "format": "date-time", "example": "2025-05-18T10:00:00Z" },
+          "created_at": { "type": "string", "format": "date-time", "example": "2025-05-18T10:00:00Z" },
+          "updated_at": { "type": "string", "format": "date-time", "example": "2025-05-18T10:00:00Z" }
         }
       }
     }
