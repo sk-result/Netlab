@@ -1,138 +1,148 @@
 {
-    "openapi": "3.0.3",
-    "info": {
-      "title": "Materi Matkul API",
-      "version": "1.0.0",
-      "description": "API CRUD untuk entitas Materi Matkul yang berelasi dengan Category Matkul"
-    },
-    "servers": [
-      {
-        "url": "http://localhost:8000"
-      }
-    ],
-    "paths": {
-      "/api/materi-matkul": {
-        "get": {
-          "summary": "Ambil semua materi matkul",
-          "responses": {
-            "200": {
-              "description": "Berhasil mengambil daftar materi"
-            }
-          }
-        },
-        "post": {
-          "summary": "Buat materi matkul baru",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "multipart/form-data": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "name": { "type": "string" },
-                    "bab": { "type": "string" },
-                    "description": { "type": "string" },
-                    "category_id": { "type": "integer" },
-                    "file_pdf": {
-                      "type": "string",
-                      "format": "binary"
-                    }
-                  },
-                  "required": ["name", "bab", "description", "category_id", "file_pdf"]
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "description": "Materi berhasil dibuat"
-            },
-            "400": {
-              "description": "Validasi gagal"
-            }
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Materi Matkul API",
+    "description": "API CRUD untuk materi matkul yang berelasi dengan kategori matkul",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8001/api"
+    }
+  ],
+  "paths": {
+    "/materi-matkul": {
+      "get": {
+        "summary": "List semua materi matkul",
+        "operationId": "getMateriMatkul",
+        "responses": {
+          "200": {
+            "description": "Berhasil mengambil data materi matkul"
           }
         }
-      },
-      "/api/materi-matkul/{id}": {
-        "get": {
-          "summary": "Ambil detail materi matkul berdasarkan ID",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": { "type": "integer" }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Detail materi ditemukan"
-            },
-            "404": {
-              "description": "Materi tidak ditemukan"
-            }
-          }
-        },
-        "put": {
-          "summary": "Update materi matkul berdasarkan ID",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": { "type": "integer" }
-            }
-          ],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "multipart/form-data": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "name": { "type": "string" },
-                    "bab": { "type": "string" },
-                    "description": { "type": "string" },
-                    "category_id": { "type": "integer" },
-                    "file_pdf": {
-                      "type": "string",
-                      "format": "binary"
-                    }
-                  },
-                  "required": ["name", "bab", "description", "category_id"]
-                }
+      }
+    },
+    "/materi-matkul/create": {
+      "post": {
+        "summary": "Tambah materi matkul",
+        "operationId": "createMateriMatkul",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama": { "type": "string" },
+                  "bab": { "type": "string" },
+                  "deskripsi": { "type": "string" },
+                  "kategori_id": { "type": "integer" },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": ["nama", "bab", "kategori_id", "file"]
               }
             }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Materi berhasil ditambahkan"
           },
-          "responses": {
-            "200": {
-              "description": "Materi berhasil diperbarui"
-            },
-            "404": {
-              "description": "Materi tidak ditemukan"
+          "400": {
+            "description": "Validasi gagal"
+          }
+        }
+      }
+    },
+    "/materi-matkul/show/{id}": {
+      "get": {
+        "summary": "Ambil detail materi berdasarkan ID",
+        "operationId": "getMateriById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Materi ditemukan"
+          },
+          "404": {
+            "description": "Materi tidak ditemukan"
+          }
+        }
+      }
+    },
+    "/materi-matkul/update/{id}": {
+      "put": {
+        "summary": "Perbarui materi matkul",
+        "operationId": "updateMateriMatkul",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama": { "type": "string" },
+                  "bab": { "type": "string" },
+                  "deskripsi": { "type": "string" },
+                  "kategori_id": { "type": "integer" },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": ["nama", "bab", "kategori_id"]
+              }
             }
           }
         },
-        "delete": {
-          "summary": "Hapus materi matkul berdasarkan ID",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": { "type": "integer" }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Materi berhasil dihapus"
-            },
-            "404": {
-              "description": "Materi tidak ditemukan"
-            }
+        "responses": {
+          "200": {
+            "description": "Materi berhasil diperbarui"
+          },
+          "404": {
+            "description": "Materi tidak ditemukan"
+          }
+        }
+      }
+    },
+    "/materi-matkul/destroy/{id}": {
+      "delete": {
+        "summary": "Hapus materi matkul",
+        "operationId": "deleteMateriMatkul",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Materi berhasil dihapus"
+          },
+          "404": {
+            "description": "Materi tidak ditemukan"
           }
         }
       }
     }
   }
-      
+}

@@ -1,130 +1,134 @@
 {
-    "openapi": "3.0.3",
-    "info": {
-      "title": "Matkul Category API",
-      "description": "API CRUD untuk kategori matkul",
-      "version": "1.0.0"
-    },
-    "servers": [
-      {
-        "url": "http://localhost:8000/api"
-      }
-    ],
-    "paths": {
-      "/matkul-categories": {
-        "get": {
-          "summary": "List semua kategori matkul",
-          "responses": {
-            "200": {
-              "description": "Berhasil mengambil data kategori matkul"
-            }
-          }
-        },
-        "post": {
-          "summary": "Tambah kategori matkul",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "name": { "type": "string" }
-                  },
-                  "required": ["name"]
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "description": "Kategori berhasil ditambahkan"
-            },
-            "400": {
-              "description": "Validasi gagal"
-            }
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Matkul Category API",
+    "description": "API CRUD untuk kategori matkul",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8001/api"
+    }
+  ],
+  "paths": {
+    "/matkul-categories": {
+      "get": {
+        "summary": "List semua kategori matkul",
+        "operationId": "getMatkulCategories",
+        "responses": {
+          "200": {
+            "description": "Berhasil mengambil data kategori matkul"
           }
         }
-      },
-      "/matkul-categories/{id}": {
-        "get": {
-          "summary": "Ambil detail kategori matkul berdasarkan ID",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
+      }
+    },
+    "/matkul-categories/create": {
+      "post": {
+        "summary": "Tambah kategori matkul",
+        "operationId": "createMatkulCategory",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
               "schema": {
-                "type": "integer"
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" }
+                },
+                "required": ["name"]
               }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Detail kategori ditemukan"
-            },
-            "404": {
-              "description": "Kategori tidak ditemukan"
             }
           }
         },
-        "put": {
-          "summary": "Perbarui kategori matkul",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "integer"
-              }
-            }
-          ],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "name": { "type": "string" }
-                  },
-                  "required": ["name"]
-                }
-              }
-            }
+        "responses": {
+          "201": {
+            "description": "Kategori berhasil ditambahkan"
           },
-          "responses": {
-            "200": {
-              "description": "Kategori berhasil diperbarui"
-            },
-            "404": {
-              "description": "Kategori tidak ditemukan"
+          "400": {
+            "description": "Validasi gagal"
+          }
+        }
+      }
+    },
+    "/matkul-categories/show/{id}": {
+      "get": {
+        "summary": "Ambil detail kategori matkul berdasarkan ID",
+        "operationId": "getMatkulCategoryById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detail kategori ditemukan"
+          },
+          "404": {
+            "description": "Kategori tidak ditemukan"
+          }
+        }
+      }
+    },
+    "/matkul-categories/update/{id}": {
+      "put": {
+        "summary": "Perbarui kategori matkul",
+        "operationId": "updateMatkulCategory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" }
+                },
+                "required": ["name"]
+              }
             }
           }
         },
-        "delete": {
-          "summary": "Hapus kategori matkul",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "integer"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Kategori berhasil dihapus"
-            },
-            "404": {
-              "description": "Kategori tidak ditemukan"
-            }
+        "responses": {
+          "200": {
+            "description": "Kategori berhasil diperbarui"
+          },
+          "404": {
+            "description": "Kategori tidak ditemukan"
+          }
+        }
+      }
+    },
+    "/matkul-categories/destroy/{id}": {
+      "delete": {
+        "summary": "Hapus kategori matkul",
+        "operationId": "deleteMatkulCategory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Kategori berhasil dihapus"
+          },
+          "404": {
+            "description": "Kategori tidak ditemukan"
           }
         }
       }
     }
   }
-  
+}

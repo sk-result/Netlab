@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Pendaftaran API",
-    "description": "API CRUD untuk data pendaftaran",
+    "title": "About API",
+    "description": "API CRUD untuk informasi halaman About",
     "version": "1.0.0"
   },
   "servers": [
@@ -11,21 +11,21 @@
     }
   ],
   "paths": {
-    "/pendaftaran": {
+    "/abouts": {
       "get": {
-        "summary": "List semua data pendaftaran",
-        "operationId": "getPendaftaran",
+        "summary": "List semua data about",
+        "operationId": "getAbouts",
         "responses": {
           "200": {
-            "description": "Berhasil mengambil data pendaftaran"
+            "description": "Berhasil mengambil data about"
           }
         }
       }
     },
-    "/pendaftaran/create": {
+    "/abouts/create": {
       "post": {
-        "summary": "Tambah data pendaftaran",
-        "operationId": "createPendaftaran",
+        "summary": "Tambah data about",
+        "operationId": "createAbout",
         "requestBody": {
           "required": true,
           "content": {
@@ -33,19 +33,17 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nama": { "type": "string" },
-                  "email": { "type": "string", "format": "email" },
-                  "telepon": { "type": "string" },
-                  "alamat": { "type": "string" }
+                  "title": { "type": "string" },
+                  "description": { "type": "string" }
                 },
-                "required": ["nama", "email", "telepon", "alamat"]
+                "required": ["title", "description"]
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Data pendaftaran berhasil ditambahkan"
+            "description": "Data about berhasil ditambahkan"
           },
           "400": {
             "description": "Validasi gagal"
@@ -53,10 +51,10 @@
         }
       }
     },
-    "/pendaftaran/show/{id}": {
+    "/abouts/show/{id}": {
       "get": {
-        "summary": "Ambil detail pendaftaran berdasarkan ID",
-        "operationId": "getPendaftaranById",
+        "summary": "Ambil detail about berdasarkan ID",
+        "operationId": "getAboutById",
         "parameters": [
           {
             "name": "id",
@@ -67,18 +65,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Data pendaftaran ditemukan"
+            "description": "Data about ditemukan"
           },
           "404": {
-            "description": "Data pendaftaran tidak ditemukan"
+            "description": "Data about tidak ditemukan"
           }
         }
       }
     },
-    "/pendaftaran/update/{id}": {
+    "/abouts/update/{id}": {
       "put": {
-        "summary": "Perbarui data pendaftaran",
-        "operationId": "updatePendaftaran",
+        "summary": "Perbarui data about",
+        "operationId": "updateAbout",
         "parameters": [
           {
             "name": "id",
@@ -94,30 +92,28 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nama": { "type": "string" },
-                  "email": { "type": "string", "format": "email" },
-                  "telepon": { "type": "string" },
-                  "alamat": { "type": "string" }
+                  "title": { "type": "string" },
+                  "description": { "type": "string" }
                 },
-                "required": ["nama", "email", "telepon", "alamat"]
+                "required": ["title", "description"]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Data pendaftaran berhasil diperbarui"
+            "description": "Data about berhasil diperbarui"
           },
           "404": {
-            "description": "Data pendaftaran tidak ditemukan"
+            "description": "Data about tidak ditemukan"
           }
         }
       }
     },
-    "/pendaftaran/destroy/{id}": {
+    "/abouts/destroy/{id}": {
       "delete": {
-        "summary": "Hapus data pendaftaran",
-        "operationId": "deletePendaftaran",
+        "summary": "Hapus data about",
+        "operationId": "deleteAbout",
         "parameters": [
           {
             "name": "id",
@@ -128,10 +124,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Data pendaftaran berhasil dihapus"
+            "description": "Data about berhasil dihapus"
           },
           "404": {
-            "description": "Data pendaftaran tidak ditemukan"
+            "description": "Data about tidak ditemukan"
           }
         }
       }

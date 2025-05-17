@@ -37,6 +37,10 @@
           {
             url: "swagger/crud-pendaftaran.json",
             name: "Pendaftaran API"
+          },
+          {
+            url: "swagger/crud-about.json",
+            name: "About API"
           }
         ],
         dom_id: '#swagger-ui',

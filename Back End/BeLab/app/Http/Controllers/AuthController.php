@@ -15,7 +15,7 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'role' => 'in:super_admin,admin,user' // Validasi role
+            'role' => 'in:super_admin,admin,user'
         ]);
 
         $user = User::create([
@@ -62,5 +62,50 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Logout berhasil'
         ]);
-    }   
+    }
+
+    // ✅ Ambil data user yang sedang login
+    public function getUser(Request $request)
+    {
+        return response()->json([
+            'user' => $request->user()
+        ]);
+    }
+
+    // ✅ Update data user
+    public function updateUser(Request $request)
+    {
+        $user = $request->user();
+
+        $request->validate([
+            'name' => 'sometimes|string',
+            'email' => 'sometimes|email|unique:users,email,' . $user->id,
+            'password' => 'sometimes|min:6',
+            'role' => 'sometimes|in:super_admin,admin,user'
+        ]);
+
+        if ($request->filled('name')) $user->name = $request->name;
+        if ($request->filled('email')) $user->email = $request->email;
+        if ($request->filled('password')) $user->password = Hash::make($request->password);
+        if ($request->filled('role')) $user->role = $request->role;
+
+        $user->save();
+
+        return response()->json([
+            'message' => 'Data user berhasil diperbarui',
+            'user' => $user
+        ]);
+    }
+
+    // ✅ Hapus user
+    public function deleteUser(Request $request)
+    {
+        $user = $request->user();
+        $user->tokens()->delete(); // Hapus semua token
+        $user->delete();
+
+        return response()->json([
+            'message' => 'Akun user berhasil dihapus'
+        ]);
+    }
 }

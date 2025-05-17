@@ -5,6 +5,11 @@
         "version": "1.0.0",
         "description": "RESTful API untuk manajemen kategori (CRUD)."
     },
+    "servers": [
+        {
+            "url": "http://localhost:8001/api"
+        }
+    ],
     "paths": {
         "/api/category": {
             "get": {
