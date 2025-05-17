@@ -35,20 +35,20 @@ Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy']);
 Route::get('/category/show/{id}', [CategoryController::class, 'show']);
 
 
+use App\Http\Controllers\MatkulCategoryController;
+Route::get('matkul-categories', [MatkulCategoryController::class, 'index']);
+Route::post('matkul-categories/create', [MatkulCategoryController::class, 'store']);
+Route::get('matkul-categories/show/{id}', [MatkulCategoryController::class, 'show']);
+Route::patch('matkul-categories/update/{id}', [MatkulCategoryController::class, 'update']);
+Route::delete('matkul-categories/destroy/{id}', [MatkulCategoryController::class, 'destroy']);
+
+
 use App\Http\Controllers\EquipmentController;
 Route::get('equipment', [EquipmentController::class, 'index']);
 Route::post('equipment/create', [EquipmentController::class, 'store']);
 Route::get('equipment/show/{id}', [EquipmentController::class, 'show']);
 Route::put('equipment/update/{id}', [EquipmentController::class, 'update']);
 Route::delete('equipment/destroy/{id}', [EquipmentController::class, 'destroy']);
-
-
-use App\Http\Controllers\MatkulCategoryController;
-Route::get('matkul-categories', [MatkulCategoryController::class, 'index']);
-Route::post('matkul-categories/create', [MatkulCategoryController::class, 'store']);
-Route::get('matkul-categories/show/{id}', [MatkulCategoryController::class, 'show']);
-Route::put('matkul-categories/update/{id}', [MatkulCategoryController::class, 'update']);
-Route::delete('matkul-categories/destroy/{id}', [MatkulCategoryController::class, 'destroy']);
 
 
 use App\Http\Controllers\MateriMatkulController;

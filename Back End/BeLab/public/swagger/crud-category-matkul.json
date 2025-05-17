@@ -11,7 +11,7 @@
     }
   ],
   "paths": {
-    "/matkul-categories": {
+    "/api/matkul-categories": {
       "get": {
         "summary": "List semua kategori matkul",
         "operationId": "getMatkulCategories",
@@ -22,7 +22,7 @@
         }
       }
     },
-    "/matkul-categories/create": {
+    "/api/matkul-categories/create": {
       "post": {
         "summary": "Tambah kategori matkul",
         "operationId": "createMatkulCategory",
@@ -50,7 +50,7 @@
         }
       }
     },
-    "/matkul-categories/show/{id}": {
+    "/api/matkul-categories/show/{id}": {
       "get": {
         "summary": "Ambil detail kategori matkul berdasarkan ID",
         "operationId": "getMatkulCategoryById",
@@ -72,8 +72,8 @@
         }
       }
     },
-    "/matkul-categories/update/{id}": {
-      "put": {
+    "/api/matkul-categories/update/{id}": {
+      "patch": {
         "summary": "Perbarui kategori matkul",
         "operationId": "updateMatkulCategory",
         "parameters": [
@@ -108,7 +108,7 @@
         }
       }
     },
-    "/matkul-categories/destroy/{id}": {
+    "/api/matkul-categories/destroy/{id}": {
       "delete": {
         "summary": "Hapus kategori matkul",
         "operationId": "deleteMatkulCategory",
