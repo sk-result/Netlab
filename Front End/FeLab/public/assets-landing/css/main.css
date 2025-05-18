@@ -1884,3 +1884,153 @@ section,
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
+
+#editor {
+    min-height: 150px;
+    /* tinggi editor saat dimulai */
+}
+
+.ck-editor__editable {
+    min-height: 150px;
+}
+
+
+:root {
+    --primary-color: #FF5722; /* oranye terang */
+    --primary-dark: #E64A19;
+    --background-modal: rgba(33, 33, 33, 0.95);
+    --text-white: #fff;
+    --input-bg: #f9f9f9;
+    --input-border: #ccc;
+    --input-focus-border: var(--primary-color);
+  }
+      #pendaftaran {
+    background: #fff8f3;
+    padding: 60px 20px;
+    text-align: center;
+    color: #333;
+  }
+  #pendaftaran h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--primary-dark);
+    letter-spacing: 1px;
+  }
+  #pendaftaran p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 25px;
+  }
+  #pendaftaran .daftar-btn {
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    border: none;
+    font-weight: 600;
+    padding: 12px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  #pendaftaran .daftar-btn:hover {
+    background-color: var(--primary-dark);
+    transform: scale(1.05);
+  }
+
+  /* Background modal tetap gelap, tapi form-nya putih */
+  .modal-content {
+    background-color: #fff; /* putih bersih untuk form */
+    border-radius: 10px;
+    color: #333; /* teks gelap untuk kontras */
+    box-shadow: 0 8px 24px rgba(255, 87, 34, 0.25); /* bayangan lembut oranye */
+  }
+
+  /* Header modal dengan warna oranye yang soft */
+  .modal-header {
+    background-color: #FF7043; /* oranye soft */
+    color: #fff;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+  }
+
+  /* Tombol close putih di header */
+  .modal-header .btn-close {
+    filter: brightness(0) invert(1);
+  }
+
+  /* Form container */
+  form.php-email-form {
+    padding: 25px 30px 30px 30px;
+  }
+
+  /* Label */
+  form.php-email-form label.form-label {
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  /* Input dan textarea */
+  form.php-email-form input[type="text"],
+  form.php-email-form input[type="email"],
+  form.php-email-form textarea,
+  form.php-email-form select {
+    background-color: #fff;
+    border: 1.5px solid #FFAB91; /* oranye muda yang lembut */
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  form.php-email-form input[type="text"]:focus,
+  form.php-email-form input[type="email"]:focus,
+  form.php-email-form textarea:focus,
+  form.php-email-form select:focus {
+    border-color: #FF5722; /* oranye utama */
+    box-shadow: 0 0 8px rgba(255, 87, 34, 0.3);
+    outline: none;
+    background-color: #fff;
+  }
+
+  /* Input group icon */
+  .input-group-text {
+    background-color: #fff;
+    border: 1.5px solid #FFAB91;
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+    font-size: 1.2rem;
+    color: #FF7043;
+  }
+
+  /* Button submit */
+  form.php-email-form button[type="submit"] {
+    background-color: #FF7043; /* oranye lembut */
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  form.php-email-form button[type="submit"]:hover {
+    background-color: #E64A19; /* oranye lebih gelap */
+    transform: scale(1.05);
+  }
+
+  /* Loading, error, dan success message */
+  .loading {
+    color: #FF7043;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .error-message {
+    font-weight: 600;
+    color: #D32F2F; /* merah soft */
+  }
+  .sent-message {
+    font-weight: 600;
+    color: #388E3C; /* hijau soft */
+  }

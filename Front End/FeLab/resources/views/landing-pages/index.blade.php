@@ -240,13 +240,9 @@
                             </div>
                         </div>
                     </div><!-- End Tab Content Item -->
-
                 </div>
-
             </div>
-
         </section><!-- /Features Section -->
-
 
         <!-- Portfolio Section -->
         <section id="portfolio" class="portfolio section">
@@ -459,13 +455,12 @@
 
         </section><!-- /Portfolio Section -->
 
-        <!-- Contact Section -->
         <!-- Section Pendaftaran -->
         <section id="pendaftaran" class="contact section">
             <div class="container section-title" data-aos="fade-up">
                 <h2>Pendaftaran</h2>
                 <p>Necessitatibus eius consequatur</p>
-                <div class="text-start mt-1">
+                <div class="text-center mt-1">
                     <button class="btn daftar-btn" data-bs-toggle="modal" data-bs-target="#modalPendaftaran">
                         Daftar Sekarang &gt;
                     </button>
@@ -473,19 +468,13 @@
             </div>
         </section>
 
-        <!-- Tambahkan di <style> atau CSS kamu -->
-        <style>
-          
-        </style>
-
-
         <!-- Modal -->
         <div class="modal fade" id="modalPendaftaran" tabindex="-1" aria-labelledby="modalPendaftaranLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content shadow-lg border-0">
-                    <div class="modal-header text-white" style="background-color: #FF4A17;">
-                        <h5 class="modal-title" id="modalPendaftaranLabel">Formulir Pendaftaran</h5>
+                    <div class="modal-header text-white">
+                        <h5 class="modal-title text-white" id="modalPendaftaranLabel">Formulir Pendaftaran</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -528,9 +517,6 @@
                                         <span class="input-group-text bg-white">📅</span>
                                     </div>
                                 </div>
-
-
-
                                 <div class="col-md-6">
                                     <label class="form-label">Jenis Kelamin *</label>
                                     <select name="jenis_kelamin" class="form-select" required>
@@ -539,18 +525,10 @@
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
                                 </div>
-
                                 <div class="col-md-12">
-                                    <label for="image" class="form-label">Upload Foto 3x4</label>
-                                    <input type="file" id="image" name="image" class="form-control"
-                                        accept="image/*" onchange="previewImage(this)">
-                                    <small id="file-name" class="form-text text-muted mt-1"></small>
-                                    <div class="mt-3">
-                                        <img id="image-preview" src="#" alt="Preview Foto"
-                                            style="max-width: 200px; display: none; border: 1px solid #ccc; padding: 5px; border-radius: 6px;">
-                                    </div>
+                                    <label for="editor" class="form-label">Upload Foto 3x4 *</label>
+                                    <textarea name="editor" id="editor" rows="5" class=""></textarea>
                                 </div>
-
                                 <div class="col-12 text-end">
                                     <div class="loading d-none">Loading...</div>
                                     <div class="error-message text-danger"></div>
@@ -558,14 +536,13 @@
                                     <button type="submit" class="btn text-white mt-3 px-4"
                                         style="background-color: #FF4A17;">Kirim Data</button>
                                 </div>
-
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-       
+
 
     </main>
 @endsection

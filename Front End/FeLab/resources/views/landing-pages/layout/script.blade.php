@@ -60,4 +60,26 @@
       });
   </script>
 
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<script>
+  ClassicEditor
+    .create(document.querySelector('#editor'), {
+      toolbar: [
+        'insertImage', 'uploadImage', '|', 'undo', 'redo'
+      ],
+      ckfinder: {
+        // You can configure custom upload URL here
+        uploadUrl: '/upload' // <-- ganti dengan handler upload milikmu jika ingin langsung upload ke server
+      }
+    })
+    .then(editor => {
+      console.log('CKEditor berhasil diinisialisasi:', editor);
+    })
+    .catch(error => {
+      console.error('CKEditor gagal dimuat:', error);
+    });
+</script>
+
+
+
   @yield('script')
