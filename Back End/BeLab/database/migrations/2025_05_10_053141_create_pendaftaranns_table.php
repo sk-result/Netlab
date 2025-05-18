@@ -11,17 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pendaftarans', function (Blueprint $table) {
+         Schema::create('pendaftarans', function (Blueprint $table) {
             $table->id();
             $table->string('nama_lengkap');
             $table->string('nim')->unique();
             $table->string('email')->unique();
             $table->string('no_hp');
-            $table->text('alamat');
+            $table->string('alamat');
             $table->date('tanggal_lahir');
-            $table->enum('jenis_kelamin', ['L', 'P']);
-            $table->date('tanggal_daftar');
-            $table->string('image')->nullable();
+            $table->string('jenis_kelamin', 15);
+            $table->string('image')->nullable(); // untuk menyimpan path gambar
             $table->timestamps();
         });
         
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('abouts');
+          Schema::dropIfExists('pendaftarans');
     }
 };

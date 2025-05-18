@@ -1,5 +1,6 @@
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+          class="bi bi-arrow-up-short"></i></a>
 
   <!-- Preloader -->
   <div id="preloader"></div>
@@ -16,7 +17,47 @@
 
   <!-- Main JS File -->
   <script src="assets-landing/js/main.js"></script>
+  <script>
+      function previewImage(input) {
+          const preview = document.getElementById('image-preview');
+          const fileNameDisplay = document.getElementById('file-name');
 
-  
+          if (input.files && input.files[0]) {
+              const reader = new FileReader();
+              fileNameDisplay.textContent = "Dipilih: " + input.files[0].name;
+
+              reader.onload = function(e) {
+                  preview.src = e.target.result;
+                  preview.style.display = "block";
+              }
+              reader.readAsDataURL(input.files[0]);
+          } else {
+              preview.style.display = "none";
+              fileNameDisplay.textContent = "";
+          }
+      }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+      flatpickr("#tanggal_lahir", {
+          dateFormat: "d-F-Y",
+          locale: {
+              firstDayOfWeek: 1,
+              weekdays: {
+                  shorthand: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+                  longhand: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
+              },
+              months: {
+                  shorthand: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus',
+                      'September', 'Oktober', 'November', 'Desember'
+                  ],
+                  longhand: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus',
+                      'September', 'Oktober', 'November', 'Desember'
+                  ],
+              }
+          }
+      });
+  </script>
 
   @yield('script')

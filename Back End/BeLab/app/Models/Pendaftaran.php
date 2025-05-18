@@ -16,7 +16,6 @@ class Pendaftaran extends Model
         'alamat',
         'tanggal_lahir',
         'jenis_kelamin',
-        'tanggal_daftar',
         'image',
     ];
 }

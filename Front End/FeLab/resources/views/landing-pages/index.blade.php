@@ -460,117 +460,112 @@
         </section><!-- /Portfolio Section -->
 
         <!-- Contact Section -->
+        <!-- Section Pendaftaran -->
         <section id="pendaftaran" class="contact section">
-
-            <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Pendaftaran</h2>
                 <p>Necessitatibus eius consequatur</p>
-            </div><!-- End Section Title -->
+                <div class="text-start mt-1">
+                    <button class="btn daftar-btn" data-bs-toggle="modal" data-bs-target="#modalPendaftaran">
+                        Daftar Sekarang &gt;
+                    </button>
+                </div>
+            </div>
+        </section>
 
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <!-- Tambahkan di <style> atau CSS kamu -->
+        <style>
+          
+        </style>
 
-                <div class="row gy-4">
-                    <div class="col-lg-12">
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalPendaftaran" tabindex="-1" aria-labelledby="modalPendaftaranLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content shadow-lg border-0">
+                    <div class="modal-header text-white" style="background-color: #FF4A17;">
+                        <h5 class="modal-title" id="modalPendaftaranLabel">Formulir Pendaftaran</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
                         <form action="forms/register.php" method="post" class="php-email-form"
                             enctype="multipart/form-data">
-                            <div class="row gy-4">
+                            <div class="row g-3">
 
                                 <div class="col-md-6">
-                                    <input type="text" name="nama_lengkap" class="form-control"
-                                        placeholder="Nama Lengkap *" required>
+                                    <label class="form-label">Nama Lengkap *</label>
+                                    <input type="text" name="nama_lengkap" class="form-control" required>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="text" name="nim" class="form-control" placeholder="NIM *"
-                                        required>
+                                    <label class="form-label">NIM *</label>
+                                    <input type="text" name="nim" class="form-control" required>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="email" name="email" class="form-control" placeholder="Email *"
-                                        required>
+                                    <label class="form-label">Email *</label>
+                                    <input type="email" name="email" class="form-control" required>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="text" name="no_hp" class="form-control" placeholder="No HP *"
-                                        required>
+                                    <label class="form-label">No HP *</label>
+                                    <input type="text" name="no_hp" class="form-control" required>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <textarea name="alamat" class="form-control" rows="2" placeholder="Alamat *" required></textarea>
+                                    <label class="form-label">Alamat *</label>
+                                    <textarea name="alamat" class="form-control" rows="2" required></textarea>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="text" name="tanggal_lahir" class="form-control"
-                                        placeholder="Tanggal Lahir *" onfocus="(this.type='date')"
-                                        onblur="if(!this.value)this.type='text'" required>
+                                    <label for="tanggal_lahir" class="form-label">Tanggal Lahir *</label>
+                                    <div class="input-group">
+                                        <input type="text" id="tanggal_lahir" name="tanggal_lahir"
+                                            class="form-control" placeholder="Pilih Tanggal Lahir" required>
+                                        <span class="input-group-text bg-white">📅</span>
+                                    </div>
                                 </div>
 
+
+
                                 <div class="col-md-6">
-                                    <select name="jenis_kelamin" class="form-control" required>
-                                        <option value="" disabled selected>Jenis Kelamin *</option>
+                                    <label class="form-label">Jenis Kelamin *</label>
+                                    <select name="jenis_kelamin" class="form-select" required>
+                                        <option value="" disabled selected>Pilih Jenis Kelamin</option>
                                         <option value="Laki-laki">Laki-laki</option>
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
                                 </div>
 
-                                <div class="col-md-6" >
-                                    <input type="text" name="tanggal_daftar" class="form-control"
-                                        placeholder="Tanggal Daftar" onfocus="(this.type='date')"
-                                        onblur="if(!this.value)this.type='text'">
+                                <div class="col-md-12">
+                                    <label for="image" class="form-label">Upload Foto 3x4</label>
+                                    <input type="file" id="image" name="image" class="form-control"
+                                        accept="image/*" onchange="previewImage(this)">
+                                    <small id="file-name" class="form-text text-muted mt-1"></small>
+                                    <div class="mt-3">
+                                        <img id="image-preview" src="#" alt="Preview Foto"
+                                            style="max-width: 200px; display: none; border: 1px solid #ccc; padding: 5px; border-radius: 6px;">
+                                    </div>
                                 </div>
 
-                                <div class="col-md-6 mt-0">
-                                  <label for="image" style="font-weight: 500; font-size: 14px; margin-bottom: 4px; display: block;">Upload Foto 3x4</label>
-                                  <input type="file" id="image" name="image" class="form-control" accept="image/*" onchange="previewImage(this)">
-                                  <small id="file-name" class="form-text text-muted mt-1"></small>
-                                  <div class="mt-2">
-                                    <img id="image-preview" src="#" alt="Preview Foto" style="max-width: 200px; display: none; border: 1px solid #ccc; padding: 5px; border-radius: 6px;">
-                                  </div>
-                                </div>
-
-
-                                <script>
-                                    function previewImage(input) {
-                                        const preview = document.getElementById('image-preview');
-                                        const fileNameDisplay = document.getElementById('file-name');
-
-                                        if (input.files && input.files[0]) {
-                                            const reader = new FileReader();
-
-                                            // tampilkan nama file
-                                            fileNameDisplay.textContent = "Dipilih: " + input.files[0].name;
-
-                                            reader.onload = function(e) {
-                                                preview.src = e.target.result;
-                                                preview.style.display = "block";
-                                            }
-
-                                            reader.readAsDataURL(input.files[0]);
-                                        } else {
-                                            preview.style.display = "none";
-                                            fileNameDisplay.textContent = "";
-                                        }
-                                    }
-                                </script>
-
-
-                                <div class="col-md-12 text-end">
-                                    <div class="loading">Loading</div>
-                                    <div class="error-message"></div>
-                                    <div class="sent-message">Data berhasil dikirim!</div>
-                                    <button type="submit">Kirim Data</button>
+                                <div class="col-12 text-end">
+                                    <div class="loading d-none">Loading...</div>
+                                    <div class="error-message text-danger"></div>
+                                    <div class="sent-message text-success">Data berhasil dikirim!</div>
+                                    <button type="submit" class="btn text-white mt-3 px-4"
+                                        style="background-color: #FF4A17;">Kirim Data</button>
                                 </div>
 
                             </div>
                         </form>
                     </div>
                 </div>
-
-
             </div>
-
-        </section><!-- /Contact Section -->
+        </div>
+       
 
     </main>
 @endsection

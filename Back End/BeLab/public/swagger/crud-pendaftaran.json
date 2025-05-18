@@ -46,8 +46,11 @@
                   "email": { "type": "string", "format": "email" },
                   "no_hp": { "type": "string" },
                   "alamat": { "type": "string" },
-                  "tanggal_lahir": { "type": "string", "format": "date" },
-                  "jenis_kelamin": { "type": "string", "enum": ["L", "P"] },
+                  "tanggal_lahir": { 
+                    "type": "string", 
+                    "description": "Format tanggal dd-MMMM-yyyy, contoh: 01-Januari-2001" 
+                  },
+                  "jenis_kelamin": { "type": "string", "enum": ["Laki-Laki", "Perempuan"] },
                   "image": { "type": "string", "format": "binary", "nullable": true }
                 },
                 "required": ["nama_lengkap", "nim", "email", "no_hp", "alamat", "tanggal_lahir", "jenis_kelamin"]
@@ -137,8 +140,11 @@
                   "email": { "type": "string", "format": "email" },
                   "no_hp": { "type": "string" },
                   "alamat": { "type": "string" },
-                  "tanggal_lahir": { "type": "string", "format": "date" },
-                  "jenis_kelamin": { "type": "string", "enum": ["L", "P"] },
+                  "tanggal_lahir": { 
+                    "type": "string", 
+                    "description": "Format tanggal dd-MMMM-yyyy, contoh: 01-Januari-2001" 
+                  },
+                  "jenis_kelamin": { "type": "string", "enum": ["Laki-Laki", "Perempuan"] },
                   "image": { "type": "string", "format": "binary", "nullable": true }
                 },
                 "required": ["nama_lengkap", "nim", "email", "no_hp", "alamat", "tanggal_lahir", "jenis_kelamin"]
@@ -234,10 +240,9 @@
           "email": { "type": "string", "format": "email", "example": "budi@example.com" },
           "no_hp": { "type": "string", "example": "08123456789" },
           "alamat": { "type": "string", "example": "Jl. Merdeka No.10" },
-          "tanggal_lahir": { "type": "string", "format": "date", "example": "2000-01-01" },
-          "jenis_kelamin": { "type": "string", "example": "L" },
+          "tanggal_lahir": { "type": "string", "example": "01-Januari-2001" },
+          "jenis_kelamin": { "type": "string", "example": "Laki-Laki" },
           "image": { "type": "string", "nullable": true, "example": "pendaftaran/abc123.jpg" },
-          "tanggal_daftar": { "type": "string", "format": "date-time", "example": "2025-05-18T10:00:00Z" },
           "created_at": { "type": "string", "format": "date-time", "example": "2025-05-18T10:00:00Z" },
           "updated_at": { "type": "string", "format": "date-time", "example": "2025-05-18T10:00:00Z" }
         }
