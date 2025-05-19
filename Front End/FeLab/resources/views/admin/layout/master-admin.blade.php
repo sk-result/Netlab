@@ -99,6 +99,11 @@
                                             <span class="sub-item">Materi Matkul</span>
                                         </a>
                                     </li>
+                                    <li class="{{ request()->routeIs('admin.about') ? 'active' : '' }}">
+                                        <a href="{{ route('admin.about') }}">
+                                            <span class="sub-item">About</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>

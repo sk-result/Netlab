@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryMatkulController;
 use App\Http\Controllers\DashboardController;
@@ -34,4 +35,8 @@ Route::get('/equipment/create', [EquipmentController::class, 'create'])->name('a
 
 Route::get('/MateriMatkul', [MateriMatkulController::class, 'index'])->name('admin.MateriMatkul');
 Route::get('/MateriMatkul/create', [MateriMatkulController::class, 'create'])->name('admin.MateriMatkul-create');
+
+Route::get('/about', [AboutController::class, 'index'])->name('admin.about');
+Route::get('/about/create', [AboutController::class, 'create'])->name('admin.about-create');
+
 });
