@@ -225,7 +225,7 @@
                                 <td>
                                   <div class="flag">
                                     <img
-                                      src="assets-admin/img/flags/id.png"
+                                      src="{{asset('assets-admin/img/flags/id.png')}}"
                                       alt="indonesia"
                                     />
                                   </div>
@@ -238,7 +238,7 @@
                                 <td>
                                   <div class="flag">
                                     <img
-                                      src="assets-admin/img/flags/us.png"
+                                      src="{{asset('assets-admin/img/flags/us.png')}}"
                                       alt="united states"
                                     />
                                   </div>
@@ -251,7 +251,7 @@
                                 <td>
                                   <div class="flag">
                                     <img
-                                      src="assets-admin/img/flags/au.png"
+                                      src="{{asset('assets-admin/img/flags/au.png')}}"
                                       alt="australia"
                                     />
                                   </div>
@@ -264,7 +264,7 @@
                                 <td>
                                   <div class="flag">
                                     <img
-                                      src="assets-admin/img/flags/ru.png"
+                                      src="{{asset('assets-admin/img/flags/ru.png')}}"
                                       alt="russia"
                                     />
                                   </div>
@@ -277,7 +277,7 @@
                                 <td>
                                   <div class="flag">
                                     <img
-                                      src="assets-admin/img/flags/cn.png"
+                                      src="{{asset('assets-admin/img/flags/cn.png')}}"
                                       alt="china"
                                     />
                                   </div>
@@ -290,7 +290,7 @@
                                 <td>
                                   <div class="flag">
                                     <img
-                                      src="assets-admin/img/flags/br.png"
+                                      src="{{asset('assets-admin/img/flags/br.png')}}"
                                       alt="brazil"
                                     />
                                   </div>
@@ -352,7 +352,7 @@
                       <div class="item-list">
                         <div class="avatar">
                           <img
-                            src="assets-admin/img/jm_denis.jpg"
+                            src="{{asset('assets-admin/img/jm_denis.jpg')}}"
                             alt="..."
                             class="avatar-img rounded-circle"
                           />
@@ -389,7 +389,7 @@
                       <div class="item-list">
                         <div class="avatar">
                           <img
-                            src="assets-admin/img/talha.jpg"
+                            src="{{asset('assets-admin/img/talha.jpg')}}"
                             alt="..."
                             class="avatar-img rounded-circle"
                           />
@@ -408,7 +408,7 @@
                       <div class="item-list">
                         <div class="avatar">
                           <img
-                            src="assets-admin/img/chadengle.jpg"
+                            src="{{asset('assets-admin/img/chadengle.jpg')}}"
                             alt="..."
                             class="avatar-img rounded-circle"
                           />

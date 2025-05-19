@@ -1,4 +1,4 @@
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     //all data
     axios.get('http://localhost:8001/api/category')
@@ -89,7 +89,7 @@
         });
     });
 </script>
-
+ --}}
 @if (session('success'))
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
