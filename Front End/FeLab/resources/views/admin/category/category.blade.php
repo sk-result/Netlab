@@ -88,25 +88,23 @@
                                         <tr>
                                             <td>{{ $cat['name'] }}</td>
                                             <td>
-                                                <div class="form-button-action">
-                                                    <form action="{{ route('admin.category-update', $cat['id']) }}">
-                                                        <button type="submit" data-bs-toggle="tooltip" title=""
-                                                            class="btn btn-link btn-primary btn-lg"
-                                                            data-original-title="Edit Task">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                    </form>
-                                                    <form action="{{ route('admin.category-destroy', $cat['id']) }}"
+                                                <div class="form-button-action d-flex align-items-center gap-1">
+                                                    <a href="{{ route('admin.category-update', $cat['id']) }}"
+                                                        class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip"
+                                                        title="Edit">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <form id="delete-form-{{ $cat['id'] }}"
+                                                        action="{{ route('admin.category-destroy', $cat['id']) }}"
                                                         method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-link btn-danger"
-                                                            onclick="return confirm('Yakin ingin menghapus kategori ini?')">
+                                                        <button type="button"
+                                                            class="btn btn-link btn-danger btn-lg swal-confirm"
+                                                            data-id="{{ $cat['id'] }}" data-name="{{ $cat['name'] }}">
                                                             <i class="fa fa-times"></i>
                                                         </button>
                                                     </form>
-
-
                                                 </div>
                                             </td>
                                         </tr>
