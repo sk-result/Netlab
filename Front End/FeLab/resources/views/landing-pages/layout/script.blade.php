@@ -6,14 +6,14 @@
   <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
-  <script src="assets-landing/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets-landing/vendor/php-email-form/validate.js"></script>
-  <script src="assets-landing/vendor/aos/aos.js"></script>
-  <script src="assets-landing/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets-landing/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets-landing/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets-landing/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets-landing/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="	https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+  <script src="	https://cdn.jsdelivr.net/npm/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 
   <!-- Main JS File -->
   <script src="assets-landing/js/main.js"></script>
@@ -65,7 +65,7 @@
   ClassicEditor
     .create(document.querySelector('#editor'), {
       toolbar: [
-        'insertImage', 'uploadImage', '|', 'undo', 'redo'
+        'imageUpload', 'undo', 'redo'
       ],
       ckfinder: {
         // You can configure custom upload URL here
