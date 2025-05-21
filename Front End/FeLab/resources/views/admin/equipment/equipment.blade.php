@@ -5,14 +5,14 @@
         <div class="page-inner">
             <div class="page-header">
                 <h3 class="fw-bold mb-3">DataTables.Net</h3>
-               
+
             </div>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <h4 class="card-title">Add Row</h4>
-                            <a href="{{route('admin.equipment-create')}}" class="btn btn-primary btn-round ms-auto" >
+                            <a href="{{ route('admin.equipment-create') }}" class="btn btn-primary btn-round ms-auto">
                                 <i class="fa fa-plus"></i>
                                 Add Row
                             </a>
@@ -87,24 +87,41 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Kungfu Panda</td>
-                                        <td>Film</td>
-                                        <td>Image.jpg</td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam nihil pariatur consequuntur iusto quo blanditiis recusandae sequi architecto minus cupiditate, optio aliquam quis possimus amet aliquid minima. Hic, provident rerum?</td>
-                                        <td>
-                                            <div class="form-button-action">
-                                                <button type="button" data-bs-toggle="tooltip" title=""
-                                                    class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" data-bs-toggle="tooltip" title=""
-                                                    class="btn btn-link btn-danger" data-original-title="Remove">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    @foreach ($equipments as $cat)
+                                        <tr>
+                                            <td>{{ $cat['name'] }}</td>
+                                            <td>{{ $cat['category']['name'] ?? '-' }}</td>
+                                            <td>
+                                                @if ($cat['image'])
+                                                    <img src="{{ file_url($cat['image']) }}" alt="{{ $cat['name'] }}"
+                                                        width="80">
+                                                @else
+                                                    <span>Tidak ada gambar</span>
+                                                @endif
+                                            </td>
+                                            <td>{{ $cat['description'] }}</td>
+                                            <td>
+                                                <div class="form-button-action d-flex align-items-center gap-1">
+                                                    <a href="{{ route('admin.equipment-update', $cat['id']) }}"
+                                                        class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip"
+                                                        title="Edit">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <form id="delete-form-{{ $cat['id'] }}"
+                                                        action="{{ route('admin.equipment-destroy', $cat['id']) }}"
+                                                        method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button"
+                                                            class="btn btn-link btn-danger btn-lg swal-confirm"
+                                                            data-id="{{ $cat['id'] }}" data-name="{{ $cat['name'] }}">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -113,4 +130,5 @@
             </div>
         </div>
     </div>
+    @include('admin.equipment.script')
 @endsection

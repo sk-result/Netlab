@@ -7,11 +7,12 @@
             <h4>Tambah Peralatan</h4>
         </div>
         <div class="card-body">
-            <form action="{{route('admin.categoryMatkul-store')}}" id="create-category" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.categoryMatkul-procesUpdate' , $category['id'])}}"  method="POST" id="create-category" enctype="multipart/form-data">
                 @csrf
+                @method('patch')
                 <div class="mb-3">
                     <label for="name" class="form-label">Jenis Peralatan</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <input type="text" class="form-control" id="name" value="{{$category['name']}}" name="name" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <a href="{{route('admin.categoryMatkul')}}" class="btn btn-secondary">Kembali</a>

@@ -22,16 +22,26 @@ Route::get('/category', [CategoryController::class, 'index'])->name('admin.categ
 Route::get('/category/create', [CategoryController::class, 'create'])->name('admin.category-create');
 Route::post('/category/store', [CategoryController::class, 'store'])->name('admin.category-store');
 Route::get('/category/update/{id}', [CategoryController::class, 'update'])->name('admin.category-update');
-Route::post('/category/procesUpdate/{id}', [CategoryController::class, 'procesUpdate'])->name('admin.category-procesUpdate');
+Route::patch('/category/procesUpdate/{id}', [CategoryController::class, 'procesUpdate'])->name('admin.category-procesUpdate');
 Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category-destroy');
 
 
 // CATEGORY MATKUL ROUTE
 Route::get('/categoryMatkul', [CategoryMatkulController::class, 'index'])->name('admin.categoryMatkul');
 Route::get('/categoryMatkul/create', [CategoryMatkulController::class, 'create'])->name('admin.categoryMatkul-create');
+Route::post('/categoryMatkul/store', [CategoryMatkulController::class, 'store'])->name('admin.categoryMatkul-store');
+Route::get('/categoryMatkul/update/{id}', [CategoryMatkulController::class, 'update'])->name('admin.categoryMatkul-update');
+Route::patch('/categoryMatkul/procesUpdate/{id}', [CategoryMatkulController::class, 'procesUpdate'])->name('admin.categoryMatkul-procesUpdate');
+Route::delete('/categoryMatkul/delete/{id}', [CategoryMatkulController::class, 'destroy'])->name('admin.categoryMatkul-destroy');
 
+// EQUIPMENT ROUTE
 Route::get('/equipment', [EquipmentController::class, 'index'])->name('admin.equipment');
 Route::get('/equipment/create', [EquipmentController::class, 'create'])->name('admin.equipment-create');
+Route::post('/equipment/store', [EquipmentController::class, 'store'])->name('admin.equipment-store');
+Route::get('/equipment/update/{id}', [EquipmentController::class, 'update'])->name('admin.equipment-update');
+Route::put('/equipment/processUpdate/{id}', [EquipmentController::class, 'processUpdate'])->name('admin.equipment-processUpdate');
+Route::delete('/equipment/delete/{id}', [EquipmentController::class, 'destroy'])->name('admin.equipment-destroy');
+
 
 Route::get('/MateriMatkul', [MateriMatkulController::class, 'index'])->name('admin.MateriMatkul');
 Route::get('/MateriMatkul/create', [MateriMatkulController::class, 'create'])->name('admin.MateriMatkul-create');

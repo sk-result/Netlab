@@ -4,7 +4,7 @@
     <div class="container">
         <div class="page-inner">
             <div class="page-header">
-                <h3 class="fw-bold mb-3">DataTables.Net</h3>
+                <h3 class="fw-bold mb-3">Category</h3>
 
             </div>
             <div class="col-md-12">

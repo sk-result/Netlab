@@ -33,6 +33,7 @@ return [
 
     'api' => [
          'base_url' => env('API_BASE_URL'),
+         'file_base_url' => env('FILE_BASE_URL'),
     ],
 
 ];

@@ -7,10 +7,17 @@ use Illuminate\Support\Facades\Http;
 
 class CategoryController extends Controller
 {
+    protected $baseUrl;
+
+    public function __construct()
+    {
+        $this->baseUrl = config('services.api.base_url');
+    }
+
     public function index()
     {
-        $baseUrl = config('services.api.base_url');
-        $response = Http::get("$baseUrl/category");
+        
+        $response = Http::get("$this->baseUrl/api/category");
         $json = $response->json();
         $categories = $json['data'] ?? [];
         return view('admin.category.category', compact('categories'));
@@ -18,8 +25,8 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        $baseUrl = config('services.api.base_url');
-        $response = Http::get("$baseUrl/category/show/$id");
+        
+        $response = Http::get("$this->baseUrl/api/category/show/$id");
         if ($response->successful()) {
             $show = $response->json();
             return view('admin.category.category', compact('show'));
@@ -34,8 +41,8 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $baseUrl = config('services.api.base_url');
-        $response = Http::post("$baseUrl/category/create", [
+        
+        $response = Http::post("$this->baseUrl/api/category/create", [
             'name' => $request->name,
         ]);
         if ($response->successful()) {
@@ -47,8 +54,8 @@ class CategoryController extends Controller
 
     public function update($id)
     {
-        $baseUrl = config('services.api.base_url');
-        $response = Http::get("$baseUrl/category/show/$id");
+        
+        $response = Http::get("$this->baseUrl/api/category/show/$id");
         if ($response->successful()) {
             $json = $response->json();
             $category = $json['data'] ?? [];
@@ -60,8 +67,8 @@ class CategoryController extends Controller
 
     public function procesUpdate(Request $request, $id)
     {
-        $baseUrl = config('services.api.base_url');
-        $response = Http::patch("$baseUrl/category/update/$id", [
+        
+        $response = Http::patch("$this->baseUrl/api/category/update/$id", [
             'name' => $request->name,
         ]);
 
@@ -74,8 +81,8 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $baseUrl = config('services.api.base_url');
-        $response = Http::delete("$baseUrl/category/delete/$id");
+        
+        $response = Http::delete("$this->baseUrl/api/category/delete/$id");
         if ($response->successful()) {
             return redirect()->route('admin.category')->with('success', 'Kategori berhasil dihapus');
         } else {

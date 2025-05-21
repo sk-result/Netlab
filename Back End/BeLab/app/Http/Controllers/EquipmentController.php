@@ -19,14 +19,14 @@ class EquipmentController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png',
-            'description' => 'nullable|string',
+            'category_id' => 'required',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'description' => 'nullable|string', 
         ]);
 
         $path = null;
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images/equipment', 'public');
+            $path = $request->file('image')->store('equipment', 'public');
         }
 
         $equipment = Equipment::create([
