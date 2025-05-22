@@ -5,14 +5,14 @@
         <div class="page-inner">
             <div class="page-header">
                 <h3 class="fw-bold mb-3">DataTables.Net</h3>
-               
+
             </div>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <h4 class="card-title">Add Row</h4>
-                            <a href="{{route('admin.MateriMatkul-create')}}" class="btn btn-primary btn-round ms-auto" >
+                            <a href="{{ route('admin.MateriMatkul-create') }}" class="btn btn-primary btn-round ms-auto">
                                 <i class="fa fa-plus"></i>
                                 Add Row
                             </a>
@@ -88,25 +88,43 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Kungfu Panda</td>
-                                        <td>2</td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam nihil pariatur consequuntur iusto quo blanditiis recusandae sequi architecto minus cupiditate, optio aliquam quis possimus amet aliquid minima. Hic, provident rerum?</td>
-                                        <td>Film</td>
-                                        <td>file.pdf</td>
-                                        <td>
-                                            <div class="form-button-action">
-                                                <button type="button" data-bs-toggle="tooltip" title=""
-                                                    class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" data-bs-toggle="tooltip" title=""
-                                                    class="btn btn-link btn-danger" data-original-title="Remove">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    @foreach ($materis as $item)
+                                        <tr>
+                                            <td>{{ $item['name'] }}</td>
+                                            <td>{{ $item['bab'] }}</td>
+                                            <td>{{ $item['description'] }}</td>
+                                            <td>{{ $item['category']['name'] ?? '-' }}</td>
+                                            <td>
+                                                @if ($item['file_pdf'])
+                                                    <a href="{{ file_url($item['file_pdf']) }}" target="_blank"
+                                                        class="btn btn-sm btn-info ">Lihat PDF</a>
+                                                @else
+                                                    <span>Tidak ada file</span>
+                                                @endif
+
+                                            </td>
+                                            <td>
+                                                <div class="form-button-action d-flex align-items-center gap-1">
+                                                    <a href="{{ route('admin.MateriMatkul-update', $item['id']) }}"
+                                                        class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip"
+                                                        title="Edit">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <form id="delete-form-{{ $item['id'] }}"
+                                                        action="{{ route('admin.MateriMatkul-destroy', $item['id']) }}"
+                                                        method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button"
+                                                            class="btn btn-link btn-danger btn-lg swal-confirm"
+                                                            data-id="{{ $item['id'] }}" data-name="{{ $item['name'] }}">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -115,4 +133,5 @@
             </div>
         </div>
     </div>
+    @include('admin.MateriMatkul.script')
 @endsection

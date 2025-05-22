@@ -45,6 +45,11 @@ Route::delete('/equipment/delete/{id}', [EquipmentController::class, 'destroy'])
 
 Route::get('/MateriMatkul', [MateriMatkulController::class, 'index'])->name('admin.MateriMatkul');
 Route::get('/MateriMatkul/create', [MateriMatkulController::class, 'create'])->name('admin.MateriMatkul-create');
+Route::post('/MateriMatkul/store', [MateriMatkulController::class, 'store'])->name('admin.MateriMatkul-store');
+Route::get('/MateriMatkul/update/{id}', [MateriMatkulController::class, 'update'])->name('admin.MateriMatkul-update');
+Route::put('/MateriMatkul/processUpdate/{id}', [MateriMatkulController::class, 'processUpdate'])->name('admin.MateriMatkul-processUpdate');
+Route::delete('/MateriMatkul/delete/{id}', [MateriMatkulController::class, 'destroy'])->name('admin.MateriMatkul-destroy');
+
 
 Route::get('/about', [AboutController::class, 'index'])->name('admin.about');
 Route::get('/about/create', [AboutController::class, 'create'])->name('admin.about-create');

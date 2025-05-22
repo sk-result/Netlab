@@ -17,6 +17,6 @@
     <link rel="stylesheet" href="{{ asset('assets-admin/css/plugins.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets-admin/css/kaiadmin.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets-admin/css/demo.css') }}">
-</head>
+</head>-
 
 @yield('head')
