@@ -14,13 +14,17 @@ class EquipmentController extends Controller
         $this->baseUrl = config('services.api.base_url');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $response = Http::get("{$this->baseUrl}/api/equipment");
 
         $equipments = $response->successful()
             ? $response->json()['data'] ?? []
             : [];
+        if ($request->ajax()) {
+            // Render hanya konten bagian @section('content') saja
+            return view('admin.equipment.content', compact('equipments'));
+        }
 
         return view('admin.equipment.equipment', compact('equipments'));
     }
@@ -104,11 +108,11 @@ class EquipmentController extends Controller
         }
 
         $response = Http::asMultipart()->put("{$this->baseUrl}/api/equipment/update/{$id}", $multipartData);
-// dd( $response);
+        // dd( $response);
         if ($response->successful()) {
             return redirect()->route('admin.equipment')->with('success', 'Peralatan berhasil diperbarui');
         } else {
-            
+
             // Tangkap seluruh response JSON untuk debugging
             $errorData = $response->json();
 

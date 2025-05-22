@@ -11,12 +11,12 @@
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-..." crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
     <!-- Tetap Lokal -->
     <link rel="stylesheet" href="{{ asset('assets-admin/css/fonts.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets-admin/css/plugins.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets-admin/css/kaiadmin.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets-admin/css/demo.css') }}">
-</head>-
+</head>
 
 @yield('head')

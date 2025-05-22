@@ -14,18 +14,24 @@ class CategoryController extends Controller
         $this->baseUrl = config('services.api.base_url');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        
+
         $response = Http::get("$this->baseUrl/api/category");
         $json = $response->json();
         $categories = $json['data'] ?? [];
+
+        if ($request->ajax()) {
+            // Render hanya konten bagian @section('content') saja
+            return view('admin.category.content' , compact('categories'));
+        }
+
         return view('admin.category.category', compact('categories'));
     }
 
     public function show($id)
     {
-        
+
         $response = Http::get("$this->baseUrl/api/category/show/$id");
         if ($response->successful()) {
             $show = $response->json();
@@ -41,7 +47,7 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        
+
         $response = Http::post("$this->baseUrl/api/category/create", [
             'name' => $request->name,
         ]);
@@ -54,7 +60,7 @@ class CategoryController extends Controller
 
     public function update($id)
     {
-        
+
         $response = Http::get("$this->baseUrl/api/category/show/$id");
         if ($response->successful()) {
             $json = $response->json();
@@ -67,7 +73,7 @@ class CategoryController extends Controller
 
     public function procesUpdate(Request $request, $id)
     {
-        
+
         $response = Http::patch("$this->baseUrl/api/category/update/$id", [
             'name' => $request->name,
         ]);
@@ -81,7 +87,7 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        
+
         $response = Http::delete("$this->baseUrl/api/category/delete/$id");
         if ($response->successful()) {
             return redirect()->route('admin.category')->with('success', 'Kategori berhasil dihapus');

@@ -15,13 +15,17 @@ class MateriMatkulController extends Controller
         $this->baseUrl = config('services.api.base_url');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $response = Http::get("{$this->baseUrl}/api/materi-matkul");
 
         $materis = $response->successful()
             ? $response->json()['data'] ?? []
             : [];
+        if ($request->ajax()) {
+            // Render hanya konten bagian @section('content') saja
+            return view('admin.MateriMatkul.content', compact('materis'));
+        }
 
         return view('admin.MateriMatkul.MateriMatkul', compact('materis'));
     }

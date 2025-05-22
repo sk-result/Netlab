@@ -14,11 +14,16 @@ class CategoryMatkulController extends Controller
         $this->baseUrl = config('services.api.base_url');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $response = Http::get("$this->baseUrl/api/matkul-categories");
         $json = $response->json();
         $categories = $json['data'] ?? [];
+          if ($request->ajax()) {
+            // Render hanya konten bagian @section('content') saja
+            return view('admin.category_matkul.content' , compact('categories'));
+        }
+
         return view('admin.category_matkul.categoryMatkul', compact('categories'));
     }
     
