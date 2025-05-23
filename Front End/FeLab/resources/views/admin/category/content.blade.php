@@ -1,16 +1,14 @@
 <style>
-    .modal-backdrop {
-        display: none;
-    }
-
     .modal-content {
         border: 2px solid #dee2e6;
         /* warna abu-abu Bootstrap */
         border-radius: 8px;
         /* opsional untuk tampilan lebih halus */
-        box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        box-shadow: 0px 6px 25px 0px rgba(0, 0, 0, .5);
         /* opsional untuk kedalaman */
     }
+
+
 
     #custom-backdrop {
         opacity: 0;
@@ -21,6 +19,7 @@
         opacity: 1;
     }
 </style>
+
 
 <div class="container mt-4">
     <div class="page-inner">
@@ -113,8 +112,8 @@
 <!-- Modal Update Kategori -->
 <div class="modal fade" id="modalUpdateKategori" tabindex="-1" aria-labelledby="modalUpdateKategoriLabel"
     aria-hidden="true" data-bs-backdrop="false">
-    <div class="modal-dialog" style="z-index: 1050;">
-        <div class="modal-content">
+    <div class="modal-dialog">
+        <div style="z-index: 1050;" class="modal-content">
             <form method="POST" id="formUpdateKategori">
                 @csrf
                 @method('PATCH')
@@ -135,16 +134,4 @@
             </form>
         </div>
     </div>
-</div>
-
-
-<!-- Backdrop custom -->
-<div id="custom-backdrop"
-    style="
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1040;">
 </div>

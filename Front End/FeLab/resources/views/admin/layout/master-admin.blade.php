@@ -53,51 +53,12 @@
         <!-- Main Panel -->
         <div class="main-panel">
             @yield('content')
-        </div>
 
-        <!-- Custom Template Settings -->
-        <div class="custom-template">
-            <div class="title">Settings</div>
-            <div class="custom-content">
-                <div class="switcher">
-
-                    <div class="switch-block">
-                        <h4>Logo Header</h4>
-                        <div class="btnSwitch">
-                            @foreach (['dark', 'blue', 'purple', 'light-blue', 'green', 'orange', 'red', 'white', 'dark2', 'blue2', 'purple2', 'light-blue2', 'green2', 'orange2', 'red2'] as $color)
-                                <button type="button"
-                                    class="changeLogoHeaderColor {{ $loop->first ? 'selected' : '' }}"
-                                    data-color="{{ $color }}"></button>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="switch-block">
-                        <h4>Navbar Header</h4>
-                        <div class="btnSwitch">
-                            @foreach (['dark', 'blue', 'purple', 'light-blue', 'green', 'orange', 'red', 'white', 'dark2', 'blue2', 'purple2', 'light-blue2', 'green2', 'orange2', 'red2'] as $color)
-                                <button type="button"
-                                    class="changeTopBarColor {{ $color == 'white' ? 'selected' : '' }}"
-                                    data-color="{{ $color }}"></button>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="switch-block">
-                        <h4>Sidebar</h4>
-                        <div class="btnSwitch">
-                            <button type="button" class="changeSideBarColor" data-color="white"></button>
-                            <button type="button" class="selected changeSideBarColor" data-color="dark"></button>
-                            <button type="button" class="changeSideBarColor" data-color="dark2"></button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
     </div>
-
     @include('admin.layout.script')
+
+    <!-- Backdrop custom -->
 
 </body>
 

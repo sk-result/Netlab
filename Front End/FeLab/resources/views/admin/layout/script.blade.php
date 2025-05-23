@@ -39,10 +39,26 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+{{-- SWEET ALERT --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if (session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '{{ session('success') }}',
+            timer: 2000,
+            showConfirmButton: false
+        });
+    </script>
+@endif
+{{-- SWEET ALERT --}}
+
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const dropdown = document.getElementById('pageDropdown');
+
         new Choices(dropdown, {
             placeholder: false,
             placeholderValue: '-- Pilih Halaman --',
@@ -54,28 +70,16 @@
         const mainPanel = document.querySelector('.main-panel');
         if (mainPanel) mainPanel.classList.add('loaded');
     });
-</script>
 
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-<script>
     // Saat dokumen siap
     $(document).ready(function() {
-        // Inisialisasi dropdown dengan Choices.js
-        const dropdown = document.getElementById('pageDropdown');
-        if (dropdown) {
-            new Choices(dropdown, {
-                placeholder: false,
-                placeholderValue: '-- Pilih Halaman --',
-                searchEnabled: false,
-                itemSelectText: '',
-                shouldSort: false
-            });
-        }
 
         // Event saat dropdown berubah
         $('#pageDropdown').on('change', function() {
             const url = $(this).val();
             if (url) {
+                // Hapus backdrop dan modal hide, karena backdrop dihapus
+                // Jadi langsung load konten baru
                 $('.main-panel').html('<div class="text-center my-5">Loading...</div>');
                 window.history.pushState({}, '', url);
 
@@ -86,7 +90,11 @@
                     success: function(data) {
                         $('.main-panel').html(data);
 
-                        // Jika halaman dashboard, inisialisasi grafik dan sparkline lagi
+                        // Inisialisasi modal atau fungsi lain jika ada
+                        if (typeof initModalsAndBackdrop === 'function')
+                            initModalsAndBackdrop();
+                        if (typeof initCategoryModals === 'function') initCategoryModals();
+
                         if (url.includes('dashboard')) {
                             if (typeof initDashboard === 'function') initDashboard();
                             if (typeof initSparkline === 'function') initSparkline();
@@ -97,7 +105,6 @@
                             '<div class="text-danger">Gagal memuat konten.</div>');
                     }
                 });
-
             }
         });
 
@@ -114,7 +121,5 @@
         }
     });
 </script>
-
-
 
 @yield('script')
