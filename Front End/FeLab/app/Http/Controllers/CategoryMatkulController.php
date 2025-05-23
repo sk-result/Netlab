@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 class CategoryMatkulController extends Controller
 {
     protected $baseUrl;
-     
+
     public function __construct()
     {
         $this->baseUrl = config('services.api.base_url');
@@ -19,19 +19,19 @@ class CategoryMatkulController extends Controller
         $response = Http::get("$this->baseUrl/api/matkul-categories");
         $json = $response->json();
         $categories = $json['data'] ?? [];
-          if ($request->ajax()) {
+        if ($request->ajax()) {
             // Render hanya konten bagian @section('content') saja
-            return view('admin.category_matkul.content' , compact('categories'));
+            return view('admin.category_matkul.content', compact('categories'));
         }
 
         return view('admin.category_matkul.categoryMatkul', compact('categories'));
     }
-    
+
     public function create()
     {
         return view('admin.category_matkul.create');
     }
-   
+
 
     public function show($id)
     {

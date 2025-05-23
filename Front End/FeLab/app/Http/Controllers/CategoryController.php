@@ -23,7 +23,7 @@ class CategoryController extends Controller
 
         if ($request->ajax()) {
             // Render hanya konten bagian @section('content') saja
-            return view('admin.category.content' , compact('categories'));
+            return view('admin.category.content', compact('categories'));
         }
 
         return view('admin.category.category', compact('categories'));
@@ -47,13 +47,19 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-
         $response = Http::post("$this->baseUrl/api/category/create", [
             'name' => $request->name,
         ]);
+
         if ($response->successful()) {
+            if ($request->ajax()) {
+                return response()->json($response->json(), 200);
+            }
             return redirect()->route('admin.category')->with('success', 'Kategori berhasil dibuat');
         } else {
+            if ($request->ajax()) {
+                return response()->json(['message' => 'Gagal membuat kategori'], 500);
+            }
             return redirect()->back()->withErrors('Gagal membuat kategori');
         }
     }
@@ -65,7 +71,7 @@ class CategoryController extends Controller
         if ($response->successful()) {
             $json = $response->json();
             $category = $json['data'] ?? [];
-            return view('admin.category.update', compact('category'));
+            return view('admin.category.category', compact('category'));
         }
 
         abort(404);

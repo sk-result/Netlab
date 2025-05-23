@@ -25,7 +25,6 @@ Route::get('/category/update/{id}', [CategoryController::class, 'update'])->name
 Route::patch('/category/procesUpdate/{id}', [CategoryController::class, 'procesUpdate'])->name('admin.category-procesUpdate');
 Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category-destroy');
 
-
 // CATEGORY MATKUL ROUTE
 Route::get('/categoryMatkul', [CategoryMatkulController::class, 'index'])->name('admin.categoryMatkul');
 Route::get('/categoryMatkul/create', [CategoryMatkulController::class, 'create'])->name('admin.categoryMatkul-create');

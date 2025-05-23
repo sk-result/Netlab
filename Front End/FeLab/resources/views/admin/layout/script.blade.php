@@ -1,6 +1,6 @@
 <script src="{{ asset('assets-admin/js/core/jquery-3.7.1.min.js') }}"></script>
 <script src="{{ asset('assets-admin/js/core/popper.min.js') }}"></script>
-<script src="{{ asset('assets-admin/js/core/bootstrap.min.js') }}"></script>
+{{-- <script src="{{ asset('assets-admin/js/core/bootstrap.min.js') }}"></script> --}}
 
 <!-- jQuery Scrollbar -->
 <script src="{{ asset('assets-admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
@@ -37,9 +37,8 @@
 <script src="{{ asset('assets-admin/js/setting-demo.js') }}"></script>
 <script src="{{ asset('assets-admin/js/demo.js') }}"></script>
 
-<script>
-   
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -108,4 +107,14 @@
         }
     });
 </script>
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
+
+
+
 @yield('script')
