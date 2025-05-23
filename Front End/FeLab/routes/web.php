@@ -19,18 +19,14 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.das
 
 // CATEGORY ROUTE
 Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
-Route::get('/category/create', [CategoryController::class, 'create'])->name('admin.category-create');
 Route::post('/category/store', [CategoryController::class, 'store'])->name('admin.category-store');
-Route::get('/category/update/{id}', [CategoryController::class, 'update'])->name('admin.category-update');
-Route::patch('/category/procesUpdate/{id}', [CategoryController::class, 'procesUpdate'])->name('admin.category-procesUpdate');
+Route::patch('/category/update/{id}', [CategoryController::class, 'update'])->name('admin.category-update');
 Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category-destroy');
 
 // CATEGORY MATKUL ROUTE
 Route::get('/categoryMatkul', [CategoryMatkulController::class, 'index'])->name('admin.categoryMatkul');
-Route::get('/categoryMatkul/create', [CategoryMatkulController::class, 'create'])->name('admin.categoryMatkul-create');
 Route::post('/categoryMatkul/store', [CategoryMatkulController::class, 'store'])->name('admin.categoryMatkul-store');
-Route::get('/categoryMatkul/update/{id}', [CategoryMatkulController::class, 'update'])->name('admin.categoryMatkul-update');
-Route::patch('/categoryMatkul/procesUpdate/{id}', [CategoryMatkulController::class, 'procesUpdate'])->name('admin.categoryMatkul-procesUpdate');
+Route::patch('/categoryMatkul/update/{id}', [CategoryMatkulController::class, 'update'])->name('admin.categoryMatkul-update');
 Route::delete('/categoryMatkul/delete/{id}', [CategoryMatkulController::class, 'destroy'])->name('admin.categoryMatkul-destroy');
 
 // EQUIPMENT ROUTE

@@ -14,7 +14,6 @@
             backdrop: false
         });
 
-        // Tidak perlu event hidden.bs.modal untuk backdrop lagi
 
         const updateForm = document.getElementById('formUpdateKategori');
         const updateInput = document.getElementById('update_name');

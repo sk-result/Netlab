@@ -40,11 +40,6 @@ class CategoryController extends Controller
         abort(404);
     }
 
-    public function create()
-    {
-        return view('admin.category.create');
-    }
-
     public function store(Request $request)
     {
         $response = Http::post("$this->baseUrl/api/category/create", [
@@ -64,22 +59,8 @@ class CategoryController extends Controller
         }
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
-
-        $response = Http::get("$this->baseUrl/api/category/show/$id");
-        if ($response->successful()) {
-            $json = $response->json();
-            $category = $json['data'] ?? [];
-            return view('admin.category.category', compact('category'));
-        }
-
-        abort(404);
-    }
-
-    public function procesUpdate(Request $request, $id)
-    {
-
         $response = Http::patch("$this->baseUrl/api/category/update/$id", [
             'name' => $request->name,
         ]);

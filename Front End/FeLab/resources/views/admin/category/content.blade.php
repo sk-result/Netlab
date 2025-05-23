@@ -7,17 +7,6 @@
         box-shadow: 0px 6px 25px 0px rgba(0, 0, 0, .5);
         /* opsional untuk kedalaman */
     }
-
-
-
-    #custom-backdrop {
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    #custom-backdrop.show {
-        opacity: 1;
-    }
 </style>
 
 

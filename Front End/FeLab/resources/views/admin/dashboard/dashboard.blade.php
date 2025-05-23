@@ -2,6 +2,7 @@
 
 @section('content')
     @include('admin.dashboard.content')  
+    @include('admin.dashboard.script')  
 @endsection
 
 
