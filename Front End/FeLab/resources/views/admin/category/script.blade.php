@@ -33,7 +33,7 @@
                     const name = editBtn.dataset.name;
 
                     updateInput.value = name;
-                    updateForm.action = `/admin/category/procesUpdate/${id}`;
+                    updateForm.action = `/admin/category/update/${id}`;
 
                     updateModal.show();
                     return;

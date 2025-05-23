@@ -34,8 +34,13 @@
                     const name = editBtn.dataset.name;
 
                     updateInput.value = name;
-                    updateForm.action = `/admin/categoryMatkul/update/${id}`;
-
+                    const a =   updateInput.value;
+                    if (a) {
+                        updateForm.action = `/admin/categoryMatkul/update/${id}`;
+                    }
+                    if (a) {
+                        updateForm.action = `/admin/category/update/${id}`;
+                    }
                     updateModal.show();
                     return;
                 }
