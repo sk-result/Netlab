@@ -47,7 +47,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">Simpan</button>
-                    <a href="" class="btn btn-secondary">Kembali</a>
+                    <a href="{{route('admin.MateriMatkul')}}" class="btn btn-secondary">Kembali</a>
                 </form>
             </div>
         </div>
