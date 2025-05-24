@@ -73,32 +73,50 @@
 
     // Saat dokumen siap
     $(document).ready(function() {
-
-        // Event saat dropdown berubah
         $('#pageDropdown').on('change', function() {
             const url = $(this).val();
             if (url) {
-                // Hapus backdrop dan modal hide, karena backdrop dihapus
-                // Jadi langsung load konten baru
                 $('.main-panel').html('<div class="text-center my-5">Loading...</div>');
                 window.history.pushState({}, '', url);
 
-                // Load konten via AJAX
                 $.ajax({
                     url: url,
                     type: 'GET',
                     success: function(data) {
+                        // console.log('✅ Data hasil AJAX:', data);
                         $('.main-panel').html(data);
 
-                        // Inisialisasi modal atau fungsi lain jika ada
-                        if (typeof initModalsAndBackdrop === 'function')
-                            initModalsAndBackdrop();
+                        // setTimeout(() => {
+                        //     console.log('🔎 Apakah tombol .btn-edit sudah ada?',
+                        //         document.querySelectorAll('.btn-edit'));
+                        // }, 500);
+                        // Inisialisasi ulang semua fitur dinamis
+                        // if (typeof initModalsAndBackdrop === 'function')
+                        //     initModalsAndBackdrop();
+                        // Test langsung klik tombol edit
+                        // document.addEventListener('click', function(e) {
+                        //     const editBtn = e.target.closest('.btn-edit');
+                        //     if (editBtn) {
+                        //         console.log(
+                        //         '🟢 Tombol Edit diklik (TEST langsung)');
+                        //     }
+                        // });
+
+                        setTimeout(() => {
+                            if (typeof initModalsAndBackdrop === 'function') {
+                                console.log(
+                                    '🔁 Panggil ulang initModalsAndBackdrop');
+                                initModalsAndBackdrop();
+                            }
+                        }, 100);
+
                         if (typeof initCategoryModals === 'function') initCategoryModals();
 
                         if (url.includes('dashboard')) {
                             if (typeof initDashboard === 'function') initDashboard();
                             if (typeof initSparkline === 'function') initSparkline();
                         }
+                        // console.log($('.main-panel').html());
                     },
                     error: function() {
                         $('.main-panel').html(
@@ -108,10 +126,13 @@
             }
         });
 
-        // Jika pertama load dan ada grafik, inisialisasi langsung
+        // Inisialisasi awal
         if (document.getElementById('statisticsChart') && typeof initDashboard === 'function') {
             initDashboard();
         }
+
+        // Panggil sekali saat load awal
+        initModalsAndBackdrop();
     });
 </script>
 <script>
@@ -121,5 +142,112 @@
         }
     });
 </script>
+
+<script>
+    function initModalsAndBackdrop() {
+        // console.log('🚀 initModalsAndBackdrop dijalankan ulang');
+
+        // const editButtons = document.querySelectorAll('.btn-edit');
+        // console.log(`🔍 Ditemukan ${editButtons.length} tombol edit di halaman`);
+        // console.log('initModalsAndBackdrop dijalankan');
+        // Ambil ulang elemen karena bisa berubah setelah AJAX
+        const modalTambahMatkul = document.getElementById('modalTambahKategoriMatkul');
+        const modalUpdateMatkul = document.getElementById('modalUpdateKategoriMatkul');
+        const formUpdateMatkul = document.getElementById('formUpdateKategoriMatkul');
+        const inputUpdateMatkul = document.querySelector('#modalUpdateKategoriMatkul #update_name');
+
+        const modalTambahUmum = document.getElementById('modalTambahKategori');
+        const modalUpdateUmum = document.getElementById('modalUpdateKategori');
+        const formUpdateUmum = document.getElementById('formUpdateKategori');
+        const inputUpdateUmum = document.querySelector('#modalUpdateKategori #update_name');
+
+        const modalTambahMatkulInstance = modalTambahMatkul ? new bootstrap.Modal(modalTambahMatkul, {
+            backdrop: false
+        }) : null;
+        const modalUpdateMatkulInstance = modalUpdateMatkul ? new bootstrap.Modal(modalUpdateMatkul, {
+            backdrop: false
+        }) : null;
+
+        const modalTambahUmumInstance = modalTambahUmum ? new bootstrap.Modal(modalTambahUmum, {
+            backdrop: false
+        }) : null;
+        const modalUpdateUmumInstance = modalUpdateUmum ? new bootstrap.Modal(modalUpdateUmum, {
+            backdrop: false
+        }) : null;
+
+        // Pasang event delegation satu kali saja
+        // if (!initModalsAndBackdrop.eventListenerAdded) {
+            document.addEventListener('click', function(e) {
+                // Tambah kategori umum
+                if (e.target.closest('#btnOpenModalKategori')) {
+                    e.preventDefault();
+                    if (modalTambahUmumInstance) modalTambahUmumInstance.show();
+                    return;
+                }
+
+                // Tambah kategori matkul
+                if (e.target.closest('#btnOpenModalMatkul')) {
+                    e.preventDefault();
+                    if (modalTambahMatkulInstance) modalTambahMatkulInstance.show();
+                    return;
+                }
+
+                // Tombol edit
+                const editBtn = e.target.closest('.btn-edit');
+                if (editBtn) {
+                    e.preventDefault();
+                    const id = editBtn.dataset.id;
+                    const name = editBtn.dataset.name.trim();
+                    const type = editBtn.dataset.type;
+
+                    if (type === 'matkul' && formUpdateMatkul && modalUpdateMatkulInstance) {
+                        inputUpdateMatkul.value = name;
+                        formUpdateMatkul.action = `/admin/categoryMatkul/update/${id}`;
+                        modalUpdateMatkulInstance.show();
+                    } else if (type === 'umum' && formUpdateUmum && modalUpdateUmumInstance) {
+                        inputUpdateUmum.value = name;
+                        formUpdateUmum.action = `/admin/category/update/${id}`;
+                        modalUpdateUmumInstance.show();
+                    }
+                    return;
+                }
+
+                // console.log(document.querySelectorAll('.btn-edit'));
+                // Tombol hapus
+                const deleteBtn = e.target.closest('.swal-confirm');
+                if (deleteBtn) {
+                    e.preventDefault();
+                    const id = deleteBtn.dataset.id;
+                    const name = deleteBtn.dataset.name;
+
+                    Swal.fire({
+                        title: `Yakin ingin menghapus kategori "${name}"?`,
+                        text: "Data yang sudah dihapus tidak bisa dikembalikan!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const form = document.getElementById(`delete-form-${id}`);
+                            if (form) form.submit();
+                        }
+                    });
+                    return;
+                }
+            });
+
+            // initModalsAndBackdrop.eventListenerAdded = true;
+        }
+    // }
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initModalsAndBackdrop();
+    });
+</script>
+
 
 @yield('script')

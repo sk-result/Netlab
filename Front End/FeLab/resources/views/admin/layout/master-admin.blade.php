@@ -56,9 +56,8 @@
 
         </div>
     </div>
+    
     @include('admin.layout.script')
-
-    <!-- Backdrop custom -->
 
 </body>
 

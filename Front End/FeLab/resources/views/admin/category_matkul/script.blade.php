@@ -1,9 +1,9 @@
-<script>
+{{-- <script>
     let modalEventBound = false;
 
     function initModalsAndBackdrop() {
-        const modalTambahEl = document.getElementById('modalTambahKategori');
-        const updateModalEl = document.getElementById('modalUpdateKategori');
+        const modalTambahEl = document.getElementById('modalTambahKategoriMatkul');
+        const updateModalEl = document.getElementById('modalUpdateKategoriMatkul');
 
         if (!modalTambahEl || !updateModalEl) return;
 
@@ -16,7 +16,7 @@
 
         // Tidak perlu event hidden.bs.modal untuk backdrop lagi
 
-        const updateForm = document.getElementById('formUpdateKategori');
+        const updateForm = document.getElementById('formUpdateKategoriMatkul');
         const updateInput = document.getElementById('update_name');
 
         if (!modalEventBound) {
@@ -85,4 +85,4 @@
     document.addEventListener('DOMContentLoaded', () => {
         initModalsAndBackdrop();
     });
-</script>
+</script> --}}

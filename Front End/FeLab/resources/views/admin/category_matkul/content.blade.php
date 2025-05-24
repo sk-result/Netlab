@@ -13,7 +13,7 @@
 <div class="container mt-4">
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Category</h3>
+            <h3 class="fw-bold mb-3">Category Matkul</h3>
         </div>
 
         <div class="col-md-12">
@@ -21,7 +21,7 @@
                 <div class="card-header d-flex align-items-center">
                     <h4 class="card-title">Add Row</h4>
                     <!-- Tombol buka modal -->
-                    <button type="button" id="btnOpenModal" class="btn btn-primary btn-round ms-auto">
+                    <button type="button" id="btnOpenModalMatkul" class="btn btn-primary btn-round ms-auto">
                         <i class="fa fa-plus"></i> Add Row
                     </button>
                 </div>
@@ -42,8 +42,8 @@
                                         <td>
                                             <div class="form-button-action d-flex align-items-center gap-1">
                                                 <button type="button" class="btn btn-link btn-primary btn-lg btn-edit"
-                                                    data-id="{{ $cat['id'] }}" data-name="{{ $cat['name'] }}"
-                                                    title="Edit">
+                                                    data-id="{{ $cat['id'] }}"
+                                                    data-name="{{ $cat['name'] }} "data-type="matkul" title="Edit">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
 
@@ -72,12 +72,12 @@
 </div>
 
 <!-- Modal Tambah Kategori -->
-<div class="modal fade" id="modalTambahKategori" tabindex="-1" aria-labelledby="modalTambahKategoriLabel"
+<div class="modal fade" id="modalTambahKategoriMatkul" tabindex="-1" aria-labelledby="modalTambahKategoriLabel"
     aria-hidden="true" data-bs-backdrop="false">
     <div class="modal-dialog" style="z-index: 1050;">
         <div class="modal-content">
             <form action="{{ route('admin.categoryMatkul-store') }}" method="POST" enctype="multipart/form-data"
-                id="formTambahKategori">
+                id="formTambahKategoriMatkul">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTambahKategoriLabel">Tambah Kategori Baru</h5>
@@ -99,11 +99,11 @@
 </div>
 
 <!-- Modal Update Kategori -->
-<div class="modal fade" id="modalUpdateKategori" tabindex="-1" aria-labelledby="modalUpdateKategoriLabel"
+<div class="modal fade" id="modalUpdateKategoriMatkul" tabindex="-1" aria-labelledby="modalUpdateKategoriLabel"
     aria-hidden="true" data-bs-backdrop="false">
     <div class="modal-dialog">
         <div style="z-index: 1050;" class="modal-content">
-            <form method="POST" id="formUpdateKategori">
+            <form method="POST" id="formUpdateKategoriMatkul">
                 @csrf
                 @method('PATCH')
                 <div class="modal-header">
@@ -112,7 +112,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="update_name" class="form-label">Jenis Peralatan</label>
+                        <label for="update_name_matkul" class="form-label">Jenis Peralatan</label>
                         <input type="text" class="form-control" id="update_name" name="name" required>
                     </div>
                 </div>

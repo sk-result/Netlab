@@ -1,0 +1,101 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffeae5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 2px solid #ff4a17;
+  width: 320px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #ff4a17;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+
+.forgot-password {
+  display: block;
+  text-align: right;
+  font-size: 0.9em;
+  margin-top: 8px;
+  text-decoration: none;
+  color: #888;
+}
+
+button {
+  display: block;
+  margin: 10px auto 0; /* Tombol berada di tengah secara horizontal */
+  padding: 12px;
+  background: #ff4a17;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  width: 100%; /* Lebar tombol agar terlihat proporsional */
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #e04315;
+}
+
+.or-divider {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+  font-size: 0.9em;
+  color: #888;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: '';
+  height: 1px;
+  background: #ccc;
+  position: absolute;
+  top: 50%;
+  width: 40%;
+}
+
+.or-divider::before {
+  left: 0;
+}
+.or-divider::after {
+  right: 0;
+}
+
+.bottom-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9em;
+}
+
+.bottom-link a {
+  color: #ff4a17;
+  text-decoration: none;
+  font-weight: bold;
+}
+

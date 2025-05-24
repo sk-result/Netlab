@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryMatkulController;
 use App\Http\Controllers\DashboardController;
@@ -12,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/showLogin' , [AuthController::class, 'showLogin'])->name('showLogin');
+Route::get('/showRegister' , [AuthController::class, 'showRegister'])->name('showRegister');
+Route::post('/login' , [AuthController::class, 'login'])->name('login');
+Route::post('/register' , [AuthController::class, 'register'])->name('register');
 
 Route::prefix('admin')->group(function () {
 

@@ -1,4 +1,4 @@
-<script>
+{{-- <script>
     let modalEventBound = false;
 
     function initModalsAndBackdrop() {
@@ -72,4 +72,5 @@
     document.addEventListener('DOMContentLoaded', () => {
         initModalsAndBackdrop();
     });
-</script>
+</script> --}}
+

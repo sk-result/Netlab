@@ -21,7 +21,7 @@
                 <div class="card-header d-flex align-items-center">
                     <h4 class="card-title">Add Row</h4>
                     <!-- Tombol buka modal -->
-                    <button type="button" id="btnOpenModal" class="btn btn-primary btn-round ms-auto">
+                    <button type="button" id="btnOpenModalKategori" class="btn btn-primary btn-round ms-auto">
                         <i class="fa fa-plus"></i> Add Row
                     </button>
                 </div>
@@ -43,7 +43,7 @@
                                             <div class="form-button-action d-flex align-items-center gap-1">
                                                 <button type="button" class="btn btn-link btn-primary btn-lg btn-edit"
                                                     data-id="{{ $cat['id'] }}" data-name="{{ $cat['name'] }}"
-                                                    title="Edit">
+                                                    data-type="umum" title="Edit">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
 
@@ -112,7 +112,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="update_name" class="form-label">Jenis Peralatan</label>
+                        <label for="update_name_kategori" class="form-label">Jenis Peralatan</label>
                         <input type="text" class="form-control" id="update_name" name="name" required>
                     </div>
                 </div>
