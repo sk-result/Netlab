@@ -35,11 +35,18 @@ Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy']);
 Route::get('/category/show/{id}', [CategoryController::class, 'show']);
 
 use App\Http\Controllers\MatkulCategoryController;
-Route::get('matkul-categories', [MatkulCategoryController::class, 'index']);
-Route::post('matkul-categories/create', [MatkulCategoryController::class, 'store']);
-Route::get('matkul-categories/show/{id}', [MatkulCategoryController::class, 'show']);
-Route::patch('matkul-categories/update/{id}', [MatkulCategoryController::class, 'update']);
-Route::delete('matkul-categories/destroy/{id}', [MatkulCategoryController::class, 'destroy']);
+Route::get('matkul-category', [MatkulCategoryController::class, 'index']);
+Route::post('matkul-category/create', [MatkulCategoryController::class, 'store']);
+Route::get('matkul-category/show/{id}', [MatkulCategoryController::class, 'show']);
+Route::patch('matkul-category/update/{id}', [MatkulCategoryController::class, 'update']);
+Route::delete('matkul-category/destroy/{id}', [MatkulCategoryController::class, 'destroy']);
+
+use App\Http\Controllers\CategoryDokumentasiController;
+Route::get('category-dokumentasi', [CategoryDokumentasiController::class, 'index']);
+Route::post('category-dokumentasi/create', [CategoryDokumentasiController::class, 'store']);
+Route::get('category-dokumentasi/show/{id}', [CategoryDokumentasiController::class, 'show']);
+Route::patch('category-dokumentasi/update/{id}', [CategoryDokumentasiController::class, 'update']);
+Route::delete('category-dokumentasi/destroy/{id}', [CategoryDokumentasiController::class, 'destroy']);
 
 use App\Http\Controllers\EquipmentController;
 Route::get('equipment', [EquipmentController::class, 'index']);
@@ -47,6 +54,13 @@ Route::post('equipment/create', [EquipmentController::class, 'store']);
 Route::get('equipment/show/{id}', [EquipmentController::class, 'show']);
 Route::put('equipment/update/{id}', [EquipmentController::class, 'update']);
 Route::delete('equipment/destroy/{id}', [EquipmentController::class, 'destroy']);
+
+use App\Http\Controllers\DokumentasiController;
+Route::get('dokumentasi', [DokumentasiController::class, 'index']);
+Route::post('dokumentasi/create', [DokumentasiController::class, 'store']);
+Route::get('dokumentasi/show/{id}', [DokumentasiController::class, 'show']);
+Route::put('dokumentasi/update/{id}', [DokumentasiController::class, 'update']);
+Route::delete('dokumentasi/destroy/{id}', [DokumentasiController::class, 'destroy']);
 
 use App\Http\Controllers\MateriMatkulController;
 Route::get('materi-matkul', [MateriMatkulController::class, 'index']);

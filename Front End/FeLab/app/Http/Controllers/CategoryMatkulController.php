@@ -16,7 +16,7 @@ class CategoryMatkulController extends Controller
 
     public function index(Request $request)
     {
-        $response = Http::get("$this->baseUrl/api/matkul-categories");
+        $response = Http::get("$this->baseUrl/api/matkul-category");
         $json = $response->json();
         $categories = $json['data'] ?? [];
         if ($request->ajax()) {
@@ -29,7 +29,7 @@ class CategoryMatkulController extends Controller
 
     public function show($id)
     {
-        $response = Http::get("$this->baseUrl/api/matkul-categories/show/$id");
+        $response = Http::get("$this->baseUrl/api/matkul-category/show/$id");
         if ($response->successful()) {
             $show = $response->json();
             return view('admin.category_matkul.update', compact('show'));
@@ -40,7 +40,7 @@ class CategoryMatkulController extends Controller
 
     public function store(Request $request)
     {
-        $response = Http::post("$this->baseUrl/api/matkul-categories/create", [
+        $response = Http::post("$this->baseUrl/api/matkul-category/create", [
             'name' => $request->name,
         ]);
         if ($response->successful()) {
@@ -54,7 +54,7 @@ class CategoryMatkulController extends Controller
     public function update(Request $request, $id)
     {
 
-        $response = Http::patch("$this->baseUrl/api/matkul-categories/update/$id", [
+        $response = Http::patch("$this->baseUrl/api/matkul-category/update/$id", [
             'name' => $request->name,
         ]);
 
@@ -68,7 +68,7 @@ class CategoryMatkulController extends Controller
     public function destroy($id)
     {
 
-        $response = Http::delete("$this->baseUrl/api/matkul-categories/destroy/$id");
+        $response = Http::delete("$this->baseUrl/api/matkul-category/destroy/$id");
         if ($response->successful()) {
             return redirect()->route('admin.categoryMatkul')->with('success', 'Kategori matkul berhasil dihapus');
         } else {

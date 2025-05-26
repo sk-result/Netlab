@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dokumetasi', function (Blueprint $table) {
+        Schema::create('category_dokumentasi', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('category_id');
-            $table->string('image')->nullable();
-            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dokumetasi');
+        Schema::dropIfExists('category_dokumentasi');
     }
 };
