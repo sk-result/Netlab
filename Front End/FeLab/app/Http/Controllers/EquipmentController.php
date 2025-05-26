@@ -16,17 +16,23 @@ class EquipmentController extends Controller
 
     public function index(Request $request)
     {
-        $response = Http::get("{$this->baseUrl}/api/equipment");
+        $equipmentResponse = Http::get("{$this->baseUrl}/api/equipment");
+        $categoryResponse = Http::get("{$this->baseUrl}/api/category");
+        
 
-        $equipments = $response->successful()
-            ? $response->json()['data'] ?? []
+        $categories = $categoryResponse->successful()
+            ? $categoryResponse->json()['data'] ?? []
+            : [];
+
+        $equipments = $equipmentResponse->successful()
+            ? $equipmentResponse->json()['data'] ?? []
             : [];
         if ($request->ajax()) {
             // Render hanya konten bagian @section('content') saja
-            return view('admin.equipment.content', compact('equipments'));
+            return view('admin.equipment.content', compact('equipments', 'categories'));
         }
 
-        return view('admin.equipment.equipment', compact('equipments'));
+        return view('admin.equipment.equipment', compact('equipments', 'categories'));
     }
 
     public function show($id)
@@ -41,16 +47,6 @@ class EquipmentController extends Controller
         abort(404);
     }
 
-    public function create()
-    {
-        $response = Http::get("{$this->baseUrl}/api/category");
-
-        $categories = $response->successful()
-            ? $response->json()['data'] ?? []
-            : [];
-
-        return view('admin.equipment.create', compact('categories'));
-    }
 
     public function store(Request $request)
     {
@@ -75,20 +71,6 @@ class EquipmentController extends Controller
             : redirect()->back()->withErrors($response->json()['message'] ?? 'Gagal membuat peralatan');
     }
 
-    public function update($id)
-    {
-        // Ambil data peralatan berdasarkan ID
-        $equipmentResponse = Http::get("{$this->baseUrl}/api/equipment/show/{$id}");
-        $categoryResponse = Http::get("{$this->baseUrl}/api/category");
-
-        if ($equipmentResponse->successful() && $categoryResponse->successful()) {
-            $equipment = $equipmentResponse->json()['data'] ?? null;
-            $categories = $categoryResponse->json()['data'] ?? [];
-
-            return view('admin.equipment.update', compact('equipment', 'categories'));
-        }
-        abort(404);
-    }
 
     public function processUpdate(Request $request, $id)
     {
@@ -121,8 +103,6 @@ class EquipmentController extends Controller
                 ->withErrors($errorData['message'] ?? 'Gagal memperbarui peralatan');
         }
     }
-
-
 
     public function destroy($id)
     {

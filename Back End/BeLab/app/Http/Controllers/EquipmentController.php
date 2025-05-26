@@ -3,93 +3,84 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipment;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class EquipmentController extends Controller
 {
+    // List semua equipment
     public function index()
     {
-        $equipment = Equipment::with('category')->get();
-        return response()->json(['status' => 200, 'data' => $equipment]);
+        $equipments = Equipment::with('category')->get();
+        return response()->json(['status' => 200, 'data' => $equipments]);
     }
 
+    // Simpan data equipment baru (bisa upload image thumbnail)
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string',
-            'category_id' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'description' => 'nullable|string', 
         ]);
 
-        $path = null;
+        $imagePath = null;
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('equipment', 'public');
+            $imagePath = $request->file('image')->store('equipment', 'public');
         }
 
         $equipment = Equipment::create([
             'name' => $request->name,
             'category_id' => $request->category_id,
-            'image' => $path,
             'description' => $request->description,
+            'image' => $imagePath,
         ]);
 
-        return response()->json(['status' => 201, 'message' => 'Peralatan berhasil ditambahkan', 'data' => $equipment], 201);
+        return response()->json([
+            'status' => 201,
+            'message' => 'Peralatan berhasil ditambahkan',
+            'data' => $equipment
+        ], 201);
     }
 
-    public function show($id)
-    {
-        $equipment = Equipment::with('category')->find($id);
-        if (!$equipment) {
-            return response()->json(['message' => 'Peralatan tidak ditemukan'], 404);
-        }
-
-        return response()->json(['status' => 200, 'data' => $equipment], 200);
-    }
-
+    // Update equipment
     public function update(Request $request, $id)
     {
         $equipment = Equipment::find($id);
-
         if (!$equipment) {
             return response()->json(['message' => 'Peralatan tidak ditemukan'], 404);
         }
 
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            'description' => 'required',
+            'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        // Update data model
         $equipment->name = $request->name;
         $equipment->category_id = $request->category_id;
         $equipment->description = $request->description;
 
-        // Jika ada file baru di-upload
         if ($request->hasFile('image')) {
-            // Menghapus gambar lama jika ada
+            // Hapus gambar lama jika ada
             if ($equipment->image) {
-                Storage::delete('public/' . $equipment->image);
+                Storage::disk('public')->delete($equipment->image);
             }
-            $imagePath = $request->file('image')->store('equipment', 'public');
-            $equipment->image = $imagePath;
+            $equipment->image = $request->file('image')->store('equipment', 'public');
         }
 
-        // Simpan perubahan ke database
         $equipment->save();
 
         return response()->json([
             'status' => 200,
-            'message' => 'Data peralatan berhasil diperbarui',
+            'message' => 'Peralatan berhasil diperbarui',
             'data' => $equipment
-        ], 200);
+        ]);
     }
 
-
+    // Hapus equipment
     public function destroy($id)
     {
         $equipment = Equipment::find($id);

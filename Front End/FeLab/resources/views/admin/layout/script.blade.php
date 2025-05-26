@@ -1,5 +1,5 @@
 <script src="{{ asset('assets-admin/js/core/jquery-3.7.1.min.js') }}"></script>
-<script src="{{ asset('assets-admin/js/core/popper.min.js') }}"></script>
+{{-- <script src="{{ asset('assets-admin/js/core/popper.min.js') }}"></script> --}}
 {{-- <script src="{{ asset('assets-admin/js/core/bootstrap.min.js') }}"></script> --}}
 
 <!-- jQuery Scrollbar -->
@@ -54,9 +54,49 @@
 @endif
 {{-- SWEET ALERT --}}
 
+{{-- <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<script>
+    function initEditor() {
+        // Cek dulu apakah sudah ada editor instance, kalau iya, destroy dulu
+        if (window.editorInstance) {
+            window.editorInstance.destroy().then(() => {
+                createEditor();
+            });
+        } else {
+            createEditor();
+        }
+    }
+
+    function createEditor() {
+        const editorElement = document.querySelector('#editor');
+        if (!editorElement) return; // kalau gak ada editor, jangan lanjut
+        const API_BASE_URL = 'http://localhost:8001';
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                toolbar: ['imageUpload', 'undo', 'redo'],
+                ckfinder: {
+                    uploadUrl:  API_BASE_URL +'/api/equipment/image-upload'
+
+                }
+            })
+            .then(editor => {
+                window.editorInstance = editor; // simpan instance global supaya bisa destroy nanti
+                console.log('CKEditor berhasil diinisialisasi');
+            })
+            .catch(error => {
+                console.error('CKEditor gagal dimuat:', error);
+            });
+    } --}}
+{{-- </script> --}}
+
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const editorElement = document.querySelector('#editor');
+        if (editorElement) {
+            initEditor();
+        }
+
         const dropdown = document.getElementById('pageDropdown');
 
         new Choices(dropdown, {
@@ -79,6 +119,16 @@
             if (url) {
                 $('.main-panel').html('<div class="text-center my-5">Loading...</div>');
                 window.history.pushState({}, '', url);
+                // $.ajax({
+                //     url: '/equipment',
+                //     type: 'GET',
+                //     success: function(data) {
+                //         console.log('AJAX success:', data);
+                //     },
+                //     error: function(xhr) {
+                //         console.log('AJAX error:', xhr.status, xhr.responseText);
+                //     }
+                // });
 
                 $.ajax({
                     url: url,
@@ -93,7 +143,8 @@
                                     '🔁 Panggil ulang initModalsAndBackdrop');
                                 initModalsAndBackdrop();
                             }
-                        }, 100);
+                        }, 1);
+                        initEditor();
 
                         if (typeof initCategoryModals === 'function') initCategoryModals();
 
@@ -132,10 +183,21 @@
 <script>
     let modalTambahMatkulInstance = null;
     let modalUpdateMatkulInstance = null;
+
     let modalTambahUmumInstance = null;
     let modalUpdateUmumInstance = null;
 
+    let modalTambahDokumentasiInstance = null;
+    let modalUpdateDokumentasiInstance = null;
+
+    let modalTambahEquipmentInstance = null;
+    let modalUpdateEquipmentInstance = null;
+
     function initModalsAndBackdrop() {
+        // console.log('🔧 initModalsAndBackdrop dipanggil');
+        // console.log('Inisialisasi modal dipanggil');
+
+
         const modalTambahMatkul = document.getElementById('modalTambahKategoriMatkul');
         const modalUpdateMatkul = document.getElementById('modalUpdateKategoriMatkul');
         const formUpdateMatkul = document.getElementById('formUpdateKategoriMatkul');
@@ -146,16 +208,64 @@
         const formUpdateUmum = document.getElementById('formUpdateKategori');
         const inputUpdateUmum = document.querySelector('#modalUpdateKategori #update_name');
 
+        const modalTambahDokumentasi = document.getElementById('modalTambahKategoriDokumentasi');
+        const modalUpdateDokumentasi = document.getElementById('modalUpdateKategoriDokumentasi');
+        const formUpdateDokumentasi = document.getElementById('formUpdateKategoriDokumentasi');
+        const inputUpdateDokumentasi = document.querySelector('#modalUpdateKategoriDokumentasi #update_name');
+
+        const modalTambahEquipment = document.getElementById('modalTambahEquipment');
+        // console.log('modalTambahEquipment:', modalTambahEquipment);
+        const modalUpdateEquipment = document.getElementById('modalUpdateEquipment');
+        const formUpdateEquipment = document.getElementById('formUpdateEquipment');
+        const inputUpdateNameEquipment = document.querySelector('#modalUpdateEquipment #update_name');
+        const inputUpdateDeskripsiEquipment = document.querySelector('#modalUpdateEquipment #update_description');
+
+        // console.log(modalTambahEquipment);
+        // if (modalTambahEquipment) {
+        //     console.log('✅ modalTambahEquipment ditemukan, buat instance modal');
+        //     modalTambahEquipmentInstance = new bootstrap.Modal(modalTambahEquipment, {
+        //         backdrop: false
+        //     });
+        // } else {
+        //     console.log('❌ modalTambahEquipment TIDAK ditemukan');
+        //     modalTambahEquipmentInstance = null;
+        // }
+
+        // if (modalUpdateEquipment) {
+        //     console.log('✅ modalUpdateEquipment ditemukan, buat instance modal');
+        //     modalUpdateEquipmentInstance = new bootstrap.Modal(modalUpdateEquipment, {
+        //         backdrop: false
+        //     });
+        // } else {
+        //     console.log('❌ modalUpdateEquipment TIDAK ditemukan');
+        //     modalUpdateEquipmentInstance = null;
+        // }
+
         if (modalTambahMatkul) modalTambahMatkulInstance = new bootstrap.Modal(modalTambahMatkul, {
             backdrop: false
         });
         if (modalUpdateMatkul) modalUpdateMatkulInstance = new bootstrap.Modal(modalUpdateMatkul, {
             backdrop: false
         });
+
         if (modalTambahUmum) modalTambahUmumInstance = new bootstrap.Modal(modalTambahUmum, {
             backdrop: false
         });
         if (modalUpdateUmum) modalUpdateUmumInstance = new bootstrap.Modal(modalUpdateUmum, {
+            backdrop: false
+        });
+
+        if (modalTambahDokumentasi) modalTambahDokumentasiInstance = new bootstrap.Modal(modalTambahDokumentasi, {
+            backdrop: false
+        });
+        if (modalUpdateDokumentasi) modalUpdateDokumentasiInstance = new bootstrap.Modal(modalUpdateDokumentasi, {
+            backdrop: false
+        });
+
+        if (modalTambahEquipment) modalTambahEquipmentInstance = new bootstrap.Modal(modalTambahEquipment, {
+            backdrop: false
+        });
+        if (modalUpdateEquipment) modalUpdateEquipmentInstance = new bootstrap.Modal(modalUpdateEquipment, {
             backdrop: false
         });
 
@@ -176,6 +286,20 @@
                 return;
             }
 
+            // Tambah kategori dokumentasi
+            if (e.target.closest('#btnOpenModalKategoriDokumentasi')) {
+                e.preventDefault();
+                if (modalTambahDokumentasiInstance) modalTambahDokumentasiInstance.show();
+                return;
+            }
+
+            // Tambah equipment
+            if (e.target.closest('#btnOpenModalEquipment')) {
+                e.preventDefault();
+                if (modalTambahEquipmentInstance) modalTambahEquipmentInstance.show();
+                return;
+            }
+
             // Tombol edit
             const editBtn = e.target.closest('.btn-edit');
             if (editBtn) {
@@ -184,14 +308,28 @@
                 const name = editBtn.dataset.name.trim();
                 const type = editBtn.dataset.type;
 
-                if (type === 'matkul' && formUpdateMatkul && modalUpdateMatkulInstance) {
-                    inputUpdateMatkul.value = name;
-                    formUpdateMatkul.action = `/admin/categoryMatkul/update/${id}`;
-                    modalUpdateMatkulInstance.show();
-                } else if (type === 'umum' && formUpdateUmum && modalUpdateUmumInstance) {
-                    inputUpdateUmum.value = name;
-                    formUpdateUmum.action = `/admin/category/update/${id}`;
-                    modalUpdateUmumInstance.show();
+                switch (type) {
+                    case 'matkul':
+                        inputUpdateMatkul.value = name;
+                        formUpdateMatkul.action = `/admin/categoryMatkul/update/${id}`;
+                        modalUpdateMatkulInstance.show();
+                        break;
+                    case 'umum':
+                        inputUpdateUmum.value = name;
+                        formUpdateUmum.action = `/admin/category/update/${id}`;
+                        modalUpdateUmumInstance.show();
+                        break;
+                    case 'dokumentasi':
+                        inputUpdateDokumentasi.value = name;
+                        formUpdateDokumentasi.action = `/admin/categoryDokumentasi/update/${id}`;
+                        modalUpdateDokumentasiInstance.show();
+                        break;
+                    case 'equipment':
+                        inputUpdateNameEquipment.value = name;
+                        inputUpdateDeskripsiEquipment.value = editBtn.dataset.description;
+                        formUpdateEquipment.action = `/admin/equipment/update/${id}`;
+                        modalUpdateEquipmentInstance.show();
+                        break;
                 }
                 return;
             }

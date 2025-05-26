@@ -3,7 +3,9 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryDokumentasiController;
 use App\Http\Controllers\CategoryMatkulController;
+use App\Http\Controllers\CkeditorUploadController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\HomeController;
@@ -13,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::post('/ckeditor/upload-image', [CkeditorUploadController::class, 'upload'])->name('ckeditor.upload');
+
 
 Route::get('/showLogin' , [AuthController::class, 'showLogin'])->name('showLogin');
 Route::get('/showRegister' , [AuthController::class, 'showRegister'])->name('showRegister');
@@ -35,13 +40,18 @@ Route::post('/categoryMatkul/store', [CategoryMatkulController::class, 'store'])
 Route::patch('/categoryMatkul/update/{id}', [CategoryMatkulController::class, 'update'])->name('admin.categoryMatkul-update');
 Route::delete('/categoryMatkul/delete/{id}', [CategoryMatkulController::class, 'destroy'])->name('admin.categoryMatkul-destroy');
 
+// CATEGORY DOKUMENTASI
+Route::get('/categoryDokumentasi', [CategoryDokumentasiController::class, 'index'])->name('admin.categoryDokumentasi');
+Route::post('/categoryDokumentasi/store', [CategoryDokumentasiController::class, 'store'])->name('admin.categoryDokumentasi-store');
+Route::patch('/categoryDokumentasi/update/{id}', [CategoryDokumentasiController::class, 'update'])->name('admin.categoryDokumentasi-update');
+Route::delete('/categoryDokumentasi/delete/{id}', [CategoryDokumentasiController::class, 'destroy'])->name('admin.categoryDokumentasi-destroy');
+
 // EQUIPMENT ROUTE
 Route::get('/equipment', [EquipmentController::class, 'index'])->name('admin.equipment');
-Route::get('/equipment/create', [EquipmentController::class, 'create'])->name('admin.equipment-create');
 Route::post('/equipment/store', [EquipmentController::class, 'store'])->name('admin.equipment-store');
-Route::get('/equipment/update/{id}', [EquipmentController::class, 'update'])->name('admin.equipment-update');
 Route::put('/equipment/processUpdate/{id}', [EquipmentController::class, 'processUpdate'])->name('admin.equipment-processUpdate');
 Route::delete('/equipment/delete/{id}', [EquipmentController::class, 'destroy'])->name('admin.equipment-destroy');
+Route::post('/equipment/upload', [EquipmentController::class, 'upload'])->name('admin.equipment-upload');
 
 
 Route::get('/MateriMatkul', [MateriMatkulController::class, 'index'])->name('admin.MateriMatkul');

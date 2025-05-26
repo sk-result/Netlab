@@ -30,6 +30,9 @@
                             <option value="{{ route('admin.categoryMatkul') }}"
                                 {{ request()->routeIs('admin.categoryMatkul') ? 'selected' : '' }}>Category Mata Kuliah
                             </option>
+                            <option value="{{ route('admin.categoryDokumentasi') }}"
+                                {{ request()->routeIs('admin.categoryDokumentasi') ? 'selected' : '' }}>Category Dokumentasi
+                            </option>
                             <option value="{{ route('admin.equipment') }}"
                                 {{ request()->routeIs('admin.equipment') ? 'selected' : '' }}>Equipment Tool</option>
                             <option value="{{ route('admin.MateriMatkul') }}"
