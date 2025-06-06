@@ -16,7 +16,7 @@
           <li><a href="#about">About</a></li>
           <li><a href="#documentation">Dokumentasi</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
-          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          {{-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Dropdown 1</a></li>
               <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -32,7 +32,7 @@
               <li><a href="#">Dropdown 3</a></li>
               <li><a href="#">Dropdown 4</a></li>
             </ul>
-          </li>
+          </li> --}}
           <li><a href="#pendaftaran">Pendaftaran</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

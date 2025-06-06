@@ -92,7 +92,7 @@ class AuthController extends Controller
 
         $user->save();
 
-        return response()->json([
+    return response()->json([
             'message' => 'Data user berhasil diperbarui',
             'user' => $user
         ]);

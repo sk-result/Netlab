@@ -26,7 +26,6 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
-
 use App\Http\Controllers\CategoryController;
 Route::get('/category', [CategoryController::class, 'index']);
 Route::post('/category/create', [CategoryController::class, 'store']);

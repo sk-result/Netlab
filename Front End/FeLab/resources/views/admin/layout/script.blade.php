@@ -54,40 +54,6 @@
 @endif
 {{-- SWEET ALERT --}}
 
-{{-- <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
-<script>
-    function initEditor() {
-        // Cek dulu apakah sudah ada editor instance, kalau iya, destroy dulu
-        if (window.editorInstance) {
-            window.editorInstance.destroy().then(() => {
-                createEditor();
-            });
-        } else {
-            createEditor();
-        }
-    }
-
-    function createEditor() {
-        const editorElement = document.querySelector('#editor');
-        if (!editorElement) return; // kalau gak ada editor, jangan lanjut
-        const API_BASE_URL = 'http://localhost:8001';
-        ClassicEditor
-            .create(document.querySelector('#editor'), {
-                toolbar: ['imageUpload', 'undo', 'redo'],
-                ckfinder: {
-                    uploadUrl:  API_BASE_URL +'/api/equipment/image-upload'
-
-                }
-            })
-            .then(editor => {
-                window.editorInstance = editor; // simpan instance global supaya bisa destroy nanti
-                console.log('CKEditor berhasil diinisialisasi');
-            })
-            .catch(error => {
-                console.error('CKEditor gagal dimuat:', error);
-            });
-    } --}}
-{{-- </script> --}}
 
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 <script>
@@ -119,16 +85,7 @@
             if (url) {
                 $('.main-panel').html('<div class="text-center my-5">Loading...</div>');
                 window.history.pushState({}, '', url);
-                // $.ajax({
-                //     url: '/equipment',
-                //     type: 'GET',
-                //     success: function(data) {
-                //         console.log('AJAX success:', data);
-                //     },
-                //     error: function(xhr) {
-                //         console.log('AJAX error:', xhr.status, xhr.responseText);
-                //     }
-                // });
+   
 
                 $.ajax({
                     url: url,
@@ -219,27 +176,6 @@
         const formUpdateEquipment = document.getElementById('formUpdateEquipment');
         const inputUpdateNameEquipment = document.querySelector('#modalUpdateEquipment #update_name');
         const inputUpdateDeskripsiEquipment = document.querySelector('#modalUpdateEquipment #update_description');
-
-        // console.log(modalTambahEquipment);
-        // if (modalTambahEquipment) {
-        //     console.log('✅ modalTambahEquipment ditemukan, buat instance modal');
-        //     modalTambahEquipmentInstance = new bootstrap.Modal(modalTambahEquipment, {
-        //         backdrop: false
-        //     });
-        // } else {
-        //     console.log('❌ modalTambahEquipment TIDAK ditemukan');
-        //     modalTambahEquipmentInstance = null;
-        // }
-
-        // if (modalUpdateEquipment) {
-        //     console.log('✅ modalUpdateEquipment ditemukan, buat instance modal');
-        //     modalUpdateEquipmentInstance = new bootstrap.Modal(modalUpdateEquipment, {
-        //         backdrop: false
-        //     });
-        // } else {
-        //     console.log('❌ modalUpdateEquipment TIDAK ditemukan');
-        //     modalUpdateEquipmentInstance = null;
-        // }
 
         if (modalTambahMatkul) modalTambahMatkulInstance = new bootstrap.Modal(modalTambahMatkul, {
             backdrop: false

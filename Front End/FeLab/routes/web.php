@@ -5,7 +5,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryDokumentasiController;
 use App\Http\Controllers\CategoryMatkulController;
-use App\Http\Controllers\CkeditorUploadController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\HomeController;
@@ -15,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-Route::post('/ckeditor/upload-image', [CkeditorUploadController::class, 'upload'])->name('ckeditor.upload');
 
 
 Route::get('/showLogin' , [AuthController::class, 'showLogin'])->name('showLogin');
