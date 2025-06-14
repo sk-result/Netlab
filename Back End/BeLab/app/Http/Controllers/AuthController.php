@@ -12,10 +12,10 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'role' => 'in:super_admin,admin,user'
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6',
+            'role' => 'nullable|in:super_admin,admin,user',
         ]);
 
         $user = User::create([
@@ -26,35 +26,48 @@ class AuthController extends Controller
         ]);
 
         return response()->json([
+            'status' => 'success',
             'message' => 'Registrasi berhasil',
-            'user' => $user
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'role' => $user->role
+            ]
         ], 201);
     }
 
+
     public function login(Request $request)
     {
+        // Validasi input
         $request->validate([
-            'email' => 'required',
-            'password' => 'required'
+            'email' => 'required|email',
+            'password' => 'required|string|min:6'
         ]);
 
+        // Cek user berdasarkan email
         $user = User::where('email', $request->email)->first();
 
+        // Validasi password atau user tidak ditemukan
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['Email atau password salah.'],
             ]);
         }
 
+        // Buat token
         $token = $user->createToken('auth_token')->plainTextToken;
-        
+
+        // Response JSON
         return response()->json([
-            
+            'status' => 'success',
             'message' => 'Login berhasil',
             'token' => $token,
-            'user' => $user
+            'user' => $user->only(['id', 'name', 'email', 'role']) // hanya field penting
         ], 200);
     }
+
 
     public function logout(Request $request)
     {
@@ -92,7 +105,7 @@ class AuthController extends Controller
 
         $user->save();
 
-    return response()->json([
+        return response()->json([
             'message' => 'Data user berhasil diperbarui',
             'user' => $user
         ]);
@@ -110,5 +123,3 @@ class AuthController extends Controller
         ]);
     }
 }
-
-// auth controller
